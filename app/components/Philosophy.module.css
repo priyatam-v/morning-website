@@ -1,0 +1,87 @@
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  background: var(--tertiary);
+}
+
+.inner {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-jakarta);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.inner.visible .eyebrow {
+  opacity: 1;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+/* Every line: same font, same size. Only opacity and style vary. */
+.line {
+  font-family: var(--font-petrona);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 2.75vw, 1.875rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--bg);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.line.lineVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Strong lines — full opacity */
+.lineStrong {
+  opacity: 0;
+  font-weight: 600;
+}
+
+.lineStrong.lineVisible {
+  opacity: 1;
+}
+
+/* Muted lines — reduced opacity */
+.lineMuted {
+  opacity: 0;
+}
+
+.lineMuted.lineVisible {
+  opacity: 0.4;
+}
+
+/* Italic — only one instance on the whole page */
+.lineItalic {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--primary) !important;
+}
+
+.lineItalic.lineVisible {
+  opacity: 0.85 !important;
+}
+
+.spacer {
+  height: 1.5rem;
+}

@@ -1,0 +1,119 @@
+.footer {
+  background: var(--tertiary);
+  padding: 40px 2rem 0;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(242, 240, 235, 0.08);
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.logoWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+  user-select: none;
+}
+
+.logoText {
+  font-family: var(--font-petrona);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--bg);
+  letter-spacing: -0.01em;
+}
+
+.logoI {
+  font-family: var(--font-petrona);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--bg);
+  letter-spacing: -0.01em;
+}
+
+.logoDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  vertical-align: top;
+  margin-top: 5px;
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
+.tagline {
+  font-family: var(--font-petrona);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--bg);
+  opacity: 0.4;
+  letter-spacing: 0.01em;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.copy {
+  font-family: var(--font-jakarta);
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--bg);
+  opacity: 0.3;
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.link {
+  font-family: var(--font-jakarta);
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--bg);
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.link:hover {
+  opacity: 0.9;
+}
+
+.bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 0 28px;
+  text-align: center;
+}
+
+.bottomText {
+  font-family: var(--font-jakarta);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg);
+  opacity: 0.18;
+}

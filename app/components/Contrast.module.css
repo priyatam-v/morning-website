@@ -1,0 +1,89 @@
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  background: var(--bg-card);
+}
+
+.inner {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.col {
+  padding: 0 4rem;
+}
+
+.divider {
+  background: rgba(61, 61, 58, 0.1);
+  align-self: stretch;
+}
+
+/* Left column — muted entirely */
+.colLeft {
+  opacity: 0.28;
+}
+
+.colHeader {
+  font-family: var(--font-jakarta);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.colLeft .colHeader {
+  color: var(--tertiary);
+}
+
+.colRight .colHeader {
+  color: var(--primary);
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lines p {
+  font-family: var(--font-petrona);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.4;
+  color: var(--tertiary);
+}
+
+/* Last line of right col carries the weight */
+.colRight .lines p:last-child {
+  font-weight: 600;
+}
+
+@media (max-width: 680px) {
+  .inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1px auto;
+    gap: 0;
+  }
+  .divider {
+    height: 1px;
+    width: 100%;
+    margin: 2.5rem 0;
+  }
+  .col {
+    padding: 0 1.5rem;
+  }
+}
