@@ -34,7 +34,7 @@ export default function Waitlist() {
         <div className={styles.inner} ref={ref}>
 
           <h2 className={styles.heading}>Morning is almost ready.</h2>
-          <p className={styles.body}>Leave your email and we'll let you know.</p>
+          <p className={styles.body}>Leave your email. We'll let you know.</p>
 
           <div className={styles.formWrap}>
             {!submitted ? (

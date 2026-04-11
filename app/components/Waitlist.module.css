@@ -2,7 +2,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
+  background: var(--bg);
   position: relative;
   overflow: hidden;
 }
@@ -43,11 +43,11 @@
 .heading {
   font-family: var(--font-petrona);
   font-weight: 600;
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-size: clamp(28px, 3.5vw, 40px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   color: var(--tertiary);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Body — same opacity treatment as elsewhere */
