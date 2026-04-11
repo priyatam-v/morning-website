@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Hero Phone v3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: #F2F0EB;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #3D3D3A;
+    overflow: hidden;
+  }
+
+  /* Full-viewport hero */
+  .hero {
+    height: 100vh;
+    display: grid;
+    /* 55% text / 45% phone column — gives phone room to breathe */
+    grid-template-columns: 55fr 45fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 56px;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* ── LEFT: text ── */
+  .hero-text { padding-right: 40px; }
+
+  .eyebrow {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #3D3D3A; opacity: 0.32; margin-bottom: 24px; font-weight: 700;
+  }
+  .headline {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(32px, 3.8vw, 48px);
+    line-height: 1.13; font-weight: 700;
+    color: #3D3D3A; margin-bottom: 18px;
+  }
+  .headline em { font-style: italic; color: #8BAF8C; font-weight: 400; }
+  .sub {
+    font-size: 15px; color: #3D3D3A; opacity: 0.48;
+    line-height: 1.72; margin-bottom: 36px; max-width: 380px;
+  }
+  .cta-btn {
+    display: inline-block; background: #3D3D3A; color: #F2F0EB;
+    font-size: 14px; font-weight: 600; padding: 14px 28px;
+    border-radius: 10px; border: none; cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: 0.1px;
+    transition: background 0.15s ease;
+  }
+  .cta-btn:hover { background: #555; }
+
+  /* ── RIGHT: phone column ── */
+  .hero-phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 18px;
+  }
+
+  /*
+    Phone sizing from UX research:
+    - 65–70% of viewport height → 0.67 × 900px ≈ 600px tall
+    - iPhone 14 Pro aspect ratio: 393 × 852 → 1 : 2.168
+    - Width = 600 / 2.168 ≈ 277px → rounded to 280px
+    This reads as a real phone, not a thumbnail, not a giant prop.
+  */
+  .phone {
+    width: 280px;
+    height: 606px;  /* 280 × 2.164 = 606 — exact iPhone 14 Pro ratio */
+    background: #18181A;
+    border-radius: 44px;
+    box-shadow:
+      0 0 0 1px #2e2e30,
+      0 0 0 3px #18181A,
+      0 32px 72px rgba(0,0,0,0.24),
+      0 8px 20px rgba(0,0,0,0.12),
+      inset 0 1px 0 rgba(255,255,255,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* Dynamic island (modern iPhone) */
+  .dynamic-island {
+    width: 92px; height: 28px;
+    background: #18181A;
+    border-radius: 20px;
+    margin-top: 10px;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+
+  .screen {
+    flex: 1;
+    width: calc(100% - 8px);
+    margin: 4px;
+    border-radius: 38px;
+    overflow: hidden;
+    background: #F2F0EB;
+    position: relative;
+  }
+
+  .home-bar {
+    width: 112px; height: 5px;
+    background: rgba(255,255,255,0.24);
+    border-radius: 3px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+
+  /* ── Cards ── */
+  .card {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    will-change: transform;
+    background: #F2F0EB;
+  }
+
+  @keyframes slideOutUp   { from { transform: translateY(0);    } to { transform: translateY(-100%); } }
+  @keyframes slideOutDown { from { transform: translateY(0);    } to { transform: translateY(100%);  } }
+  @keyframes slideInUp    { from { transform: translateY(100%); } to { transform: translateY(0);     } }
+  @keyframes slideInDown  { from { transform: translateY(-100%);} to { transform: translateY(0);     } }
+
+  .exit-up    { animation: slideOutUp   0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .exit-down  { animation: slideOutDown 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .enter-up   { animation: slideInUp    0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .enter-down { animation: slideInDown  0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+  .card-strip  { width: 100%; height: 4px; flex-shrink: 0; }
+  .card-illus  { width: 100%; height: 42%; flex-shrink: 0; overflow: hidden; }
+  .card-body   { padding: 10px 16px 0; flex: 1; overflow: hidden; }
+  .card-cat    { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 7px; }
+  .card-hook   { font-family: 'Petrona', Georgia, serif; font-size: 13.5px; line-height: 1.38; font-weight: 600; color: #3D3D3A; margin-bottom: 7px; }
+  .card-insight{ font-family: 'Petrona', Georgia, serif; font-size: 10px; line-height: 1.6; color: #3D3D3A; opacity: 0.58; }
+  .card-footer {
+    padding: 10px 16px; display: flex; justify-content: space-between;
+    align-items: center; border-top: 1px solid rgba(61,61,58,0.07); flex-shrink: 0;
+  }
+  .card-mark  { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 7.5px; letter-spacing: 0.22em; color: #8BAF8C; font-weight: 700; }
+  .card-btns  { display: flex; gap: 6px; }
+  .card-btn   {
+    font-size: 8px; padding: 4px 9px; border-radius: 100px;
+    border: none; cursor: pointer;
+    font-family: 'Plus Jakarta Sans'; font-weight: 600;
+  }
+
+  /* ── Controls: progress bar + prev/next ── */
+  .controls-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 280px;
+  }
+
+  /* Minimal text-based prev / next buttons */
+  .nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3D3D3A;
+    opacity: 0.3;
+    padding: 4px 0;
+    transition: opacity 0.15s ease;
+    white-space: nowrap;
+    /* Underline treatment on hover */
+    border-bottom: 1px solid transparent;
+  }
+  .nav-btn:hover:not(:disabled) {
+    opacity: 0.75;
+    border-bottom-color: rgba(61,61,58,0.35);
+  }
+  .nav-btn:disabled {
+    opacity: 0.12;
+    cursor: not-allowed;
+  }
+
+  /* Progress track — fills the space between prev and next */
+  .progress-track {
+    flex: 1;
+    height: 2px;
+    background: rgba(61,61,58,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0%;
+  }
+  @keyframes fillBar { from { width: 0%; } to { width: 100%; } }
+  .progress-fill.running {
+    animation: fillBar var(--dur, 3.5s) linear forwards;
+  }
+
+  /* Dot indicators — subtle, below controls */
+  .dot-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(61,61,58,0.18);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .dot.active {
+    width: 18px;
+    border-radius: 3px;
+  }
+  .dot:hover { opacity: 0.6; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+
+  <!-- LEFT: copy -->
+  <div class="hero-text">
+    <p class="eyebrow">Morning</p>
+    <p class="headline">Something<br>worth knowing.<br><em>Every morning.</em></p>
+    <p class="sub">One insight, drawn from science, economics, psychology and history. Finished before your coffee goes cold.</p>
+    <button class="cta-btn">Join the Waitlist</button>
+  </div>
+
+  <!-- RIGHT: phone + controls -->
+  <div class="hero-phone">
+
+    <div class="phone">
+      <div class="dynamic-island"></div>
+      <div class="screen" id="screen"></div>
+      <div class="home-bar"></div>
+    </div>
+
+    <!-- Prev ─────── progress bar ─────── Next -->
+    <div class="controls-row">
+      <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" disabled>Prev</button>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next</button>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="dot-row" id="dotRow"></div>
+
+  </div>
+</div>
+
+<script>
+const AUTO_MS = 3500;
+const ANIM_MS = 400;
+
+const CARDS = [
+  {
+    category: 'Health', color: '#1D9E75', bg: '#E1F5EE',
+    type: 'Counterintuitive Fact',
+    hook: "Sleep is not rest. It's when your brain does its most important work.",
+    insight: "During deep sleep, the glymphatic system flushes toxic waste — including proteins linked to Alzheimer's. You cannot make up for lost sleep.",
+    illus: (c,b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><circle cx="140" cy="66" r="46" fill="${c}" opacity="0.10"/><ellipse cx="140" cy="116" rx="20" ry="28" fill="${c}" opacity="0.12"/><path d="M110 66 Q140 42 170 66" stroke="${c}" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.45"/><line x1="140" y1="66" x2="140" y2="116" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.28"/><path d="M140 94 L116 108" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.22"/><path d="M140 94 L164 108" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.22"/><circle cx="140" cy="66" r="10" fill="${c}" opacity="0.3"/></svg>`
+  },
+  {
+    category: 'Money', color: '#BA7517', bg: '#FAEEDA',
+    type: 'Mental Model',
+    hook: "The market pays for what's hard to replace, not what's hard to do.",
+    insight: "Effort and value are not the same thing. A surgeon who takes 20 minutes on a 20-year skill doesn't charge for the minutes.",
+    illus: (c,b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><rect x="28" y="96" width="28" height="56" rx="3" fill="${c}" opacity="0.2"/><rect x="68" y="76" width="28" height="76" rx="3" fill="${c}" opacity="0.32"/><rect x="108" y="52" width="28" height="100" rx="3" fill="${c}" opacity="0.46"/><rect x="148" y="28" width="28" height="124" rx="3" fill="${c}" opacity="0.62"/><path d="M42 94 L82 74 L122 50 L162 26" stroke="${c}" stroke-width="2.5" stroke-dasharray="5 4" opacity="0.4" fill="none"/><circle cx="162" cy="26" r="6" fill="${c}" opacity="0.7"/></svg>`
+  },
+  {
+    category: 'Psychology', color: '#993C1D', bg: '#FAECE7',
+    type: 'Mental Model',
+    hook: "You don't rise to your goals. You fall to the level of your systems.",
+    insight: "Goals tell you where to go. Systems determine whether you get there. The difference is always the process.",
+    illus: (c,b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><path d="M140 148 C94 148 62 126 62 98 C62 74 78 62 96 59 C96 42 108 26 140 26 C172 26 184 42 184 59 C202 62 218 74 218 98 C218 126 186 148 140 148Z" fill="${c}" opacity="0.09" stroke="${c}" stroke-width="1.5" stroke-opacity="0.18"/><path d="M114 86 Q126 74 140 80 Q154 74 166 86" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.38"/><circle cx="140" cy="108" r="11" fill="${c}" opacity="0.14" stroke="${c}" stroke-width="1.5" stroke-opacity="0.25"/></svg>`
+  },
+  {
+    category: 'Tech', color: '#534AB7', bg: '#EEEDFE',
+    type: 'Concept Explained',
+    hook: "AI doesn't think. It predicts — and that distinction changes everything.",
+    insight: "LLMs predict the most likely next word, over and over. No reasoning, no understanding. Just pattern. Knowing this tells you when to trust it.",
+    illus: (c,b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><circle cx="140" cy="80" r="62" stroke="${c}" stroke-width="1.5" opacity="0.13" fill="none"/><circle cx="140" cy="80" r="40" stroke="${c}" stroke-width="1.5" opacity="0.2" fill="none"/><circle cx="140" cy="80" r="18" fill="${c}" opacity="0.18"/><circle cx="140" cy="80" r="7" fill="${c}" opacity="0.55"/><line x1="140" y1="18" x2="140" y2="6" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/><line x1="202" y1="80" x2="214" y2="80" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/><line x1="140" y1="142" x2="140" y2="154" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/><line x1="78" y1="80" x2="66" y2="80" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/></svg>`
+  },
+  {
+    category: 'World', color: '#185FA5', bg: '#E6F1FB',
+    type: 'Historical Lens',
+    hook: "Every border on a map was drawn by someone with an army.",
+    insight: "The world's political geography is not natural — it's the residue of wars, treaties, and empire. Understanding this changes how you read the news.",
+    illus: (c,b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><line x1="140" y1="80" x2="64" y2="36" stroke="${c}" stroke-width="1.2" stroke-opacity="0.2"/><line x1="140" y1="80" x2="218" y2="40" stroke="${c}" stroke-width="1.2" stroke-opacity="0.2"/><line x1="140" y1="80" x2="224" y2="118" stroke="${c}" stroke-width="1.2" stroke-opacity="0.2"/><line x1="140" y1="80" x2="58" y2="120" stroke="${c}" stroke-width="1.2" stroke-opacity="0.2"/><line x1="140" y1="80" x2="140" y2="18" stroke="${c}" stroke-width="1.2" stroke-opacity="0.2"/><line x1="64" y1="36" x2="218" y2="40" stroke="${c}" stroke-width="0.8" stroke-opacity="0.1"/><line x1="218" y1="40" x2="224" y2="118" stroke="${c}" stroke-width="0.8" stroke-opacity="0.1"/><line x1="224" y1="118" x2="58" y2="120" stroke="${c}" stroke-width="0.8" stroke-opacity="0.1"/><line x1="58" y1="120" x2="64" y2="36" stroke="${c}" stroke-width="0.8" stroke-opacity="0.1"/><circle cx="140" cy="80" r="14" fill="${c}" opacity="0.15"/><circle cx="140" cy="80" r="5" fill="${c}" opacity="0.55"/><circle cx="64" cy="36" r="7" fill="${c}" opacity="0.28"/><circle cx="218" cy="40" r="7" fill="${c}" opacity="0.28"/><circle cx="224" cy="118" r="7" fill="${c}" opacity="0.28"/><circle cx="58" cy="120" r="7" fill="${c}" opacity="0.28"/><circle cx="140" cy="18" r="5" fill="${c}" opacity="0.2"/></svg>`
+  },
+];
+
+let current = 0;
+let animating = false;
+let autoTimer = null;
+
+function buildCard(idx) {
+  const c = CARDS[idx];
+  return `
+    <div class="card-strip" style="background:${c.color};"></div>
+    <div class="card-illus">${c.illus(c.color, c.bg)}</div>
+    <div class="card-body">
+      <p class="card-cat" style="color:${c.color};">${c.type} · ${c.category}</p>
+      <p class="card-hook">${c.hook}</p>
+      <p class="card-insight">${c.insight}</p>
+    </div>
+    <div class="card-footer">
+      <span class="card-mark">MORNING</span>
+      <div class="card-btns">
+        <button class="card-btn" style="background:${c.bg};color:${c.color};">Helpful</button>
+        <button class="card-btn" style="background:rgba(61,61,58,0.08);color:#3D3D3A;opacity:0.5;">Save</button>
+      </div>
+    </div>
+  `;
+}
+
+function updateControls() {
+  // Dots
+  document.getElementById('dotRow').innerHTML = CARDS.map((_, i) =>
+    `<div class="dot${i === current ? ' active' : ''}"
+          style="${i === current ? `background:${CARDS[current].color};` : ''}"
+          onclick="goTo(${i})"></div>`
+  ).join('');
+  // Buttons
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === CARDS.length - 1;
+}
+
+function startBar() {
+  const fill = document.getElementById('progressFill');
+  fill.className = 'progress-fill';
+  fill.style.width = '0%';
+  fill.style.background = CARDS[current].color;
+  void fill.offsetWidth;
+  fill.style.setProperty('--dur', AUTO_MS + 'ms');
+  fill.className = 'progress-fill running';
+}
+
+function scheduleAuto() {
+  clearTimeout(autoTimer);
+  startBar();
+  autoTimer = setTimeout(() => {
+    const next = (current + 1) % CARDS.length;
+    doNavigate(current, next, 1);
+  }, AUTO_MS);
+}
+
+function doNavigate(from, to, dir) {
+  if (animating || to === from) return;
+  animating = true;
+
+  const screen = document.getElementById('screen');
+  const out = screen.querySelector('.card');
+  out.classList.add(dir > 0 ? 'exit-up' : 'exit-down');
+
+  const inc = document.createElement('div');
+  inc.className = 'card ' + (dir > 0 ? 'enter-up' : 'enter-down');
+  inc.innerHTML = buildCard(to);
+  screen.appendChild(inc);
+
+  current = to;
+  updateControls();
+
+  setTimeout(() => {
+    out.remove();
+    animating = false;
+    scheduleAuto();
+  }, ANIM_MS);
+}
+
+function navigate(dir) {
+  const next = current + dir;
+  if (next < 0 || next >= CARDS.length) return;
+  clearTimeout(autoTimer);
+  doNavigate(current, next, dir);
+}
+
+function goTo(idx) {
+  if (idx === current) return;
+  clearTimeout(autoTimer);
+  doNavigate(current, idx, idx > current ? 1 : -1);
+}
+
+// Init
+const screen = document.getElementById('screen');
+const init = document.createElement('div');
+init.className = 'card';
+init.innerHTML = buildCard(0);
+screen.appendChild(init);
+updateControls();
+scheduleAuto();
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowUp')   navigate(-1);
+});
+</script>
+</body>
+</html>

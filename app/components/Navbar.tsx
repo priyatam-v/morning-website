@@ -3,7 +3,7 @@ import styles from './Navbar.module.css'
 
 export default function Navbar() {
   const scrollToWaitlist = () => {
-    window.dispatchEvent(new CustomEvent('navigate-to-section', { detail: { index: 4 } }))
+    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (

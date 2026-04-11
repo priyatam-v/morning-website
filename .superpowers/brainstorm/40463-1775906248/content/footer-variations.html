@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Footer Variations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1C1C1A;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #F2F0EB;
+    padding: 48px 32px 80px;
+  }
+
+  h1 { font-family: 'Petrona', Georgia, serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .page-sub { color: #555; font-size: 13px; margin-bottom: 52px; line-height: 1.6; max-width: 560px; }
+  .var-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; margin-bottom: 16px; font-weight: 700; }
+  .var-label span { color: #8BAF8C; }
+  .block { margin-bottom: 56px; }
+  .note { margin-top: 14px; font-size: 12px; color: #555; line-height: 1.6; }
+  .note strong { color: #777; }
+
+  /* Context: light waitlist section above */
+  .context {
+    background: #F2F0EB;
+    border-radius: 16px 16px 0 0;
+    padding: 32px 48px;
+    text-align: center;
+    border-bottom: none;
+  }
+  .context-heading {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 22px; font-weight: 600; color: #3D3D3A; margin-bottom: 6px;
+  }
+  .context-sub { font-size: 13px; color: rgba(61,61,58,0.4); }
+
+  /* ══════════════════════════════════════
+     VARIATION A — Single clean row
+     Logo left · links center · copyright right
+  ══════════════════════════════════════ */
+  .va {
+    background: #3D3D3A;
+    border-radius: 0 0 16px 16px;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .va-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 17px; font-weight: 600; color: #F2F0EB;
+    display: flex; align-items: baseline;
+  }
+  .dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #8BAF8C; vertical-align: top; margin-top: 3px; }
+  .va-links { display: flex; gap: 20px; }
+  .va-link { font-size: 12px; color: rgba(242,240,235,0.35); text-decoration: none; transition: color 0.2s; }
+  .va-link:hover { color: rgba(242,240,235,0.7); }
+  .va-copy { font-size: 11px; color: rgba(242,240,235,0.18); }
+
+  /* ══════════════════════════════════════
+     VARIATION B — Two rows
+     Top: logo + tagline left, links right
+     Bottom: manifesto line centered
+  ══════════════════════════════════════ */
+  .vb {
+    background: #3D3D3A;
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+  }
+  .vb-top {
+    padding: 28px 48px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    border-bottom: 1px solid rgba(242,240,235,0.06);
+  }
+  .vb-logo-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .vb-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 17px; font-weight: 600; color: #F2F0EB;
+    display: flex; align-items: baseline;
+  }
+  .vb-tagline {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 12px; font-style: italic; font-weight: 400;
+    color: rgba(242,240,235,0.28);
+  }
+  .vb-links { display: flex; gap: 20px; align-items: center; }
+  .vb-link { font-size: 12px; color: rgba(242,240,235,0.32); text-decoration: none; transition: color 0.2s; }
+  .vb-link:hover { color: rgba(242,240,235,0.65); }
+  .vb-bottom {
+    padding: 14px 48px;
+    text-align: center;
+  }
+  .vb-manifesto {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(242,240,235,0.12);
+  }
+
+  /* ══════════════════════════════════════
+     VARIATION C — Centered, minimal
+     Just logo + two links + copyright stacked
+  ══════════════════════════════════════ */
+  .vc {
+    background: #3D3D3A;
+    border-radius: 0 0 16px 16px;
+    padding: 32px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .vc-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 17px; font-weight: 600; color: #F2F0EB;
+    display: flex; align-items: baseline;
+  }
+  .vc-links { display: flex; gap: 20px; }
+  .vc-link { font-size: 12px; color: rgba(242,240,235,0.32); text-decoration: none; transition: color 0.2s; }
+  .vc-link:hover { color: rgba(242,240,235,0.65); }
+  .vc-copy { font-size: 11px; color: rgba(242,240,235,0.15); }
+
+  /* ══════════════════════════════════════
+     VARIATION D — Logo + tagline left, links stacked right
+     More spacious, slightly richer
+  ══════════════════════════════════════ */
+  .vd {
+    background: #3D3D3A;
+    border-radius: 0 0 16px 16px;
+    padding: 32px 48px 28px;
+  }
+  .vd-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(242,240,235,0.06);
+    margin-bottom: 16px;
+  }
+  .vd-left { display: flex; flex-direction: column; gap: 6px; }
+  .vd-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 17px; font-weight: 600; color: #F2F0EB;
+    display: flex; align-items: baseline;
+  }
+  .vd-tagline {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 12px; font-style: italic; font-weight: 400;
+    color: rgba(242,240,235,0.28);
+  }
+  .vd-links { display: flex; gap: 20px; align-items: center; }
+  .vd-link { font-size: 12px; color: rgba(242,240,235,0.32); text-decoration: none; transition: color 0.2s; }
+  .vd-link:hover { color: rgba(242,240,235,0.65); }
+  .vd-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .vd-copy { font-size: 11px; color: rgba(242,240,235,0.15); }
+  .vd-manifesto {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(242,240,235,0.1);
+  }
+</style>
+</head>
+<body>
+
+<h1>Footer — Four variations</h1>
+<p class="page-sub">All shown in context — light waitlist section above, dark footer below. Updated email and Instagram links included in all.</p>
+
+<!-- ══ VARIATION A ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>A</span> — Single clean row. Logo · Links · Copyright.</p>
+  <div class="context">
+    <p class="context-heading">Morning is almost ready.</p>
+    <p class="context-sub">Leave your email. We'll let you know.</p>
+  </div>
+  <div class="va">
+    <span class="va-logo">Morn<span class="dot"></span>ng</span>
+    <div class="va-links">
+      <a class="va-link" href="#">hello@getmorning.co</a>
+      <a class="va-link" href="#">@getmorning.co on Instagram</a>
+    </div>
+    <span class="va-copy">© 2026 Morning</span>
+  </div>
+  <p class="note"><strong>Most minimal.</strong> Everything in one row. No tagline, no manifesto. Just the logo, the two contact links, and a copyright notice. Clean, unobtrusive, gets out of the way.</p>
+</div>
+
+<!-- ══ VARIATION B ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>B</span> — Two rows: logo + links above, manifesto below.</p>
+  <div class="context">
+    <p class="context-heading">Morning is almost ready.</p>
+    <p class="context-sub">Leave your email. We'll let you know.</p>
+  </div>
+  <div class="vb">
+    <div class="vb-top">
+      <div class="vb-logo-wrap">
+        <span class="vb-logo">Morn<span class="dot"></span>ng</span>
+        <span class="vb-tagline">Learn something real today.</span>
+      </div>
+      <div class="vb-links">
+        <a class="vb-link" href="#">hello@getmorning.co</a>
+        <a class="vb-link" href="#">@getmorning.co on Instagram</a>
+        <span class="vb-link" style="color:rgba(242,240,235,0.12);">© 2026 Morning</span>
+      </div>
+    </div>
+    <div class="vb-bottom">
+      <p class="vb-manifesto">No streaks &nbsp;·&nbsp; No guilt &nbsp;·&nbsp; No algorithm</p>
+    </div>
+  </div>
+  <p class="note"><strong>Closest to today.</strong> Keeps the tagline and the manifesto bottom strip. The last thing a visitor reads is "No streaks. No guilt. No algorithm." — a values reminder that reinforces the product. Slightly richer than A.</p>
+</div>
+
+<!-- ══ VARIATION C ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>C</span> — Centered. Logo, links, copyright stacked.</p>
+  <div class="context">
+    <p class="context-heading">Morning is almost ready.</p>
+    <p class="context-sub">Leave your email. We'll let you know.</p>
+  </div>
+  <div class="vc">
+    <span class="vc-logo">Morn<span class="dot"></span>ng</span>
+    <div class="vc-links">
+      <a class="vc-link" href="#">hello@getmorning.co</a>
+      <a class="vc-link" href="#">@getmorning.co on Instagram</a>
+    </div>
+    <span class="vc-copy">© 2026 Morning</span>
+  </div>
+  <p class="note"><strong>Symmetrical and calm.</strong> Centered layout echoes the centered waitlist content above it. Feels like a natural close rather than a functional footer. Works especially well if Morning's brand leans editorial.</p>
+</div>
+
+<!-- ══ VARIATION D ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>D</span> — Logo + tagline left, links right, manifesto bottom.</p>
+  <div class="context">
+    <p class="context-heading">Morning is almost ready.</p>
+    <p class="context-sub">Leave your email. We'll let you know.</p>
+  </div>
+  <div class="vd">
+    <div class="vd-inner">
+      <div class="vd-left">
+        <span class="vd-logo">Morn<span class="dot"></span>ng</span>
+        <span class="vd-tagline">Learn something real today.</span>
+      </div>
+      <div class="vd-links">
+        <a class="vd-link" href="#">hello@getmorning.co</a>
+        <a class="vd-link" href="#">@getmorning.co on Instagram</a>
+      </div>
+    </div>
+    <div class="vd-bottom">
+      <span class="vd-copy">© 2026 Morning</span>
+      <span class="vd-manifesto">No streaks &nbsp;·&nbsp; No guilt &nbsp;·&nbsp; No algorithm</span>
+    </div>
+  </div>
+  <p class="note"><strong>Most structured.</strong> Clear hierarchy — logo + identity top, links top right, copyright + manifesto bottom. The manifesto sits quietly at the bottom right, barely visible, but there for those who read everything. Feels the most like a proper product footer.</p>
+</div>
+
+</body>
+</html>

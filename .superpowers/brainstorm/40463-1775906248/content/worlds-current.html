@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Worlds (current)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #F2F0EB;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #3D3D3A;
+    min-height: 100vh;
+    padding: 72px 48px 80px;
+  }
+
+  /* Header */
+  .header { max-width: 600px; margin: 0 auto 56px; text-align: center; }
+  .eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #C4856A; margin-bottom: 20px;
+  }
+  .heading {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 38px); line-height: 1.22;
+    font-weight: 600; color: #3D3D3A; margin-bottom: 16px;
+  }
+  .heading em { font-style: italic; font-weight: 300; color: #8BAF8C; }
+  .sub { font-size: 14px; color: rgba(61,61,58,0.5); line-height: 1.7; }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    max-width: 1100px;
+    margin: 0 auto 48px;
+  }
+
+  .world-card {
+    border-radius: 14px;
+    padding: 20px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s ease;
+    cursor: default;
+  }
+  .world-card:hover { transform: translateY(-3px); }
+
+  .world-illus { width: 56px; height: 56px; }
+  .world-cat {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase;
+  }
+  .world-name {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 16px; font-weight: 600; color: #3D3D3A;
+  }
+  .world-desc { font-size: 11px; line-height: 1.6; color: rgba(61,61,58,0.6); }
+
+  /* Footer */
+  .footer { text-align: center; }
+  .footer-line1 {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 18px; font-weight: 600; color: #3D3D3A; margin-bottom: 4px;
+  }
+  .footer-line2 {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 16px; color: rgba(61,61,58,0.4); font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <p class="eyebrow">The Knowledge</p>
+  <h2 class="heading">Morning draws from the domains<br><em>that actually shape a life.</em></h2>
+  <p class="sub">Morning draws from five worlds of human knowledge. More worlds are being mapped.</p>
+</div>
+
+<div class="grid">
+
+  <!-- The Body -->
+  <div class="world-card" style="background:#E1F5EE;">
+    <svg class="world-illus" viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="80" r="45" fill="#1D9E75" opacity="0.12"/>
+      <ellipse cx="100" cy="145" rx="25" ry="35" fill="#1D9E75" opacity="0.15"/>
+      <path d="M75 80 Q100 55 125 80" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M100 80 L100 145" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+      <path d="M100 105 L75 120" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+      <path d="M100 105 L125 120" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+      <circle cx="100" cy="80" r="5" fill="#1D9E75" opacity="0.5"/>
+    </svg>
+    <p class="world-cat" style="color:#1D9E75;">Health</p>
+    <p class="world-name">The Body</p>
+    <div class="world-desc">
+      <p>Sleep, stress, nutrition, longevity.</p>
+      <p>Science that changes how you treat yourself.</p>
+    </div>
+  </div>
+
+  <!-- The Game -->
+  <div class="world-card" style="background:#FAEEDA;">
+    <svg class="world-illus" viewBox="0 0 200 200" fill="none">
+      <rect x="30" y="120" width="24" height="50" rx="4" fill="#BA7517" opacity="0.2"/>
+      <rect x="64" y="95" width="24" height="75" rx="4" fill="#BA7517" opacity="0.3"/>
+      <rect x="98" y="70" width="24" height="100" rx="4" fill="#BA7517" opacity="0.4"/>
+      <rect x="132" y="45" width="24" height="125" rx="4" fill="#BA7517" opacity="0.6"/>
+      <path d="M42 118 L76 93 L110 68 L144 43" stroke="#BA7517" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 3" opacity="0.4" fill="none"/>
+      <circle cx="144" cy="43" r="5" fill="#BA7517" opacity="0.7"/>
+    </svg>
+    <p class="world-cat" style="color:#BA7517;">Money</p>
+    <p class="world-name">The Game</p>
+    <div class="world-desc">
+      <p>How money actually moves.</p>
+      <p>And why most of what you were taught about it is wrong.</p>
+    </div>
+  </div>
+
+  <!-- The World — UPDATED -->
+  <div class="world-card" style="background:#E6F1FB;">
+    <svg class="world-illus" viewBox="0 0 200 200" fill="none">
+      <line x1="100" y1="100" x2="50" y2="60" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+      <line x1="100" y1="100" x2="155" y2="65" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+      <line x1="100" y1="100" x2="160" y2="130" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+      <line x1="100" y1="100" x2="55" y2="145" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+      <line x1="100" y1="100" x2="100" y2="42" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+      <line x1="50" y1="60" x2="155" y2="65" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+      <line x1="155" y1="65" x2="160" y2="130" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+      <line x1="160" y1="130" x2="55" y2="145" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+      <line x1="55" y1="145" x2="50" y2="60" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+      <circle cx="100" cy="100" r="12" fill="#185FA5" opacity="0.18"/>
+      <circle cx="100" cy="100" r="5" fill="#185FA5" opacity="0.55"/>
+      <circle cx="50" cy="60" r="7" fill="#185FA5" opacity="0.3"/>
+      <circle cx="155" cy="65" r="7" fill="#185FA5" opacity="0.3"/>
+      <circle cx="160" cy="130" r="7" fill="#185FA5" opacity="0.3"/>
+      <circle cx="55" cy="145" r="7" fill="#185FA5" opacity="0.3"/>
+      <circle cx="100" cy="42" r="5" fill="#185FA5" opacity="0.22"/>
+    </svg>
+    <p class="world-cat" style="color:#185FA5;">World</p>
+    <p class="world-name">The World</p>
+    <div class="world-desc">
+      <p>Geopolitics, history, science, society.</p>
+      <p>The forces quietly shaping the world you wake up in.</p>
+    </div>
+  </div>
+
+  <!-- The Shift -->
+  <div class="world-card" style="background:#EEEDFE;">
+    <svg class="world-illus" viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="100" r="55" stroke="#534AB7" stroke-width="1.5" opacity="0.15" fill="none"/>
+      <circle cx="100" cy="100" r="35" stroke="#534AB7" stroke-width="1.5" opacity="0.2" fill="none"/>
+      <circle cx="100" cy="100" r="15" fill="#534AB7" opacity="0.2"/>
+      <circle cx="100" cy="100" r="7" fill="#534AB7" opacity="0.5"/>
+      <line x1="100" y1="45" x2="100" y2="30" stroke="#534AB7" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <line x1="155" y1="100" x2="170" y2="100" stroke="#534AB7" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <line x1="100" y1="155" x2="100" y2="170" stroke="#534AB7" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <line x1="45" y1="100" x2="30" y2="100" stroke="#534AB7" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <circle cx="100" cy="30" r="4" fill="#534AB7" opacity="0.4"/>
+    </svg>
+    <p class="world-cat" style="color:#534AB7;">Tech</p>
+    <p class="world-name">The Shift</p>
+    <div class="world-desc">
+      <p>The world is being rewritten.</p>
+      <p>Understand it before it surprises you.</p>
+    </div>
+  </div>
+
+  <!-- The Mind -->
+  <div class="world-card" style="background:#FAECE7;">
+    <svg class="world-illus" viewBox="0 0 200 200" fill="none">
+      <path d="M100 155 C65 155 40 135 40 105 C40 80 55 68 70 65 C70 50 80 35 100 35 C120 35 130 50 130 65 C145 68 160 80 160 105 C160 135 135 155 100 155Z" fill="#993C1D" opacity="0.1" stroke="#993C1D" stroke-width="1.5" stroke-opacity="0.2"/>
+      <path d="M100 65 L100 100" stroke="#993C1D" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+      <path d="M80 85 Q90 75 100 80 Q110 75 120 85" stroke="#993C1D" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.35"/>
+      <circle cx="100" cy="110" r="8" fill="#993C1D" opacity="0.15" stroke="#993C1D" stroke-width="1.5" stroke-opacity="0.3"/>
+    </svg>
+    <p class="world-cat" style="color:#993C1D;">Psychology</p>
+    <p class="world-name">The Mind</p>
+    <div class="world-desc">
+      <p>Why you decide what you decide.</p>
+      <p>And how to get better at both.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p class="footer-line1">Five worlds for now.</p>
+  <p class="footer-line2">More are being mapped.</p>
+</div>
+
+</body>
+</html>

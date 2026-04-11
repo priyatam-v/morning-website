@@ -1,0 +1,92 @@
+<h2>The World — card illustration</h2>
+<p class="subtitle">The current "The Work" SVG (a document with a tick) needs replacing for "The World." Three options in the same minimal style as the existing four world cards.</p>
+
+<div class="cards">
+
+  <!-- Option A: Globe outline with latitude/longitude arcs -->
+  <div class="card" data-choice="globe" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#E6F1FB; display:flex; align-items:center; justify-content:center; padding:28px; min-height:180px;">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:120px;">
+        <!-- Outer globe circle -->
+        <circle cx="100" cy="100" r="62" stroke="#185FA5" stroke-width="1.5" stroke-opacity="0.3" fill="#185FA5" fill-opacity="0.06"/>
+        <!-- Latitude lines -->
+        <ellipse cx="100" cy="100" rx="62" ry="22" stroke="#185FA5" stroke-width="1" stroke-opacity="0.18" fill="none"/>
+        <ellipse cx="100" cy="78" rx="50" ry="12" stroke="#185FA5" stroke-width="1" stroke-opacity="0.13" fill="none"/>
+        <ellipse cx="100" cy="122" rx="50" ry="12" stroke="#185FA5" stroke-width="1" stroke-opacity="0.13" fill="none"/>
+        <!-- Vertical longitude arcs -->
+        <path d="M100 38 Q130 100 100 162" stroke="#185FA5" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+        <path d="M100 38 Q70 100 100 162" stroke="#185FA5" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+        <!-- Vertical axis -->
+        <line x1="100" y1="38" x2="100" y2="162" stroke="#185FA5" stroke-width="1.5" stroke-opacity="0.25" stroke-linecap="round"/>
+        <!-- Horizontal equator -->
+        <line x1="38" y1="100" x2="162" y2="100" stroke="#185FA5" stroke-width="1.5" stroke-opacity="0.25" stroke-linecap="round"/>
+        <!-- Small location dot -->
+        <circle cx="118" cy="82" r="4" fill="#185FA5" opacity="0.5"/>
+        <circle cx="118" cy="82" r="8" stroke="#185FA5" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>A — Globe outline</h3>
+      <p>Latitude/longitude arcs. Classic, immediately legible as "world." Consistent with The Shift's concentric-circle style.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Connected nodes / network -->
+  <div class="card" data-choice="nodes" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#E6F1FB; display:flex; align-items:center; justify-content:center; padding:28px; min-height:180px;">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:120px;">
+        <!-- Connection lines first (behind nodes) -->
+        <line x1="100" y1="100" x2="50" y2="60" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+        <line x1="100" y1="100" x2="155" y2="65" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+        <line x1="100" y1="100" x2="160" y2="130" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+        <line x1="100" y1="100" x2="55" y2="145" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+        <line x1="100" y1="100" x2="100" y2="42" stroke="#185FA5" stroke-width="1.2" stroke-opacity="0.2"/>
+        <!-- Cross-connections between outer nodes -->
+        <line x1="50" y1="60" x2="155" y2="65" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+        <line x1="155" y1="65" x2="160" y2="130" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+        <line x1="160" y1="130" x2="55" y2="145" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+        <line x1="55" y1="145" x2="50" y2="60" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.1"/>
+        <!-- Centre node -->
+        <circle cx="100" cy="100" r="12" fill="#185FA5" opacity="0.18"/>
+        <circle cx="100" cy="100" r="5" fill="#185FA5" opacity="0.55"/>
+        <!-- Outer nodes -->
+        <circle cx="50" cy="60" r="7" fill="#185FA5" opacity="0.3"/>
+        <circle cx="155" cy="65" r="7" fill="#185FA5" opacity="0.3"/>
+        <circle cx="160" cy="130" r="7" fill="#185FA5" opacity="0.3"/>
+        <circle cx="55" cy="145" r="7" fill="#185FA5" opacity="0.3"/>
+        <circle cx="100" cy="42" r="5" fill="#185FA5" opacity="0.22"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>B — Connected nodes</h3>
+      <p>A network of dots and lines. Suggests interconnection — geopolitics, society, cause and effect. More abstract, more open to interpretation.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Minimal map-like abstraction (continents as blobs) -->
+  <div class="card" data-choice="map" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#E6F1FB; display:flex; align-items:center; justify-content:center; padding:28px; min-height:180px;">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:120px;">
+        <!-- Ocean base circle -->
+        <circle cx="100" cy="100" r="65" fill="#185FA5" opacity="0.07"/>
+        <!-- Continent blobs (abstract, not accurate) -->
+        <!-- Americas-ish -->
+        <path d="M62 62 Q48 75 50 95 Q52 115 62 125 Q70 132 68 118 Q72 105 78 98 Q85 85 80 70 Z" fill="#185FA5" opacity="0.22"/>
+        <!-- Europe/Africa-ish -->
+        <path d="M105 55 Q118 52 125 62 Q130 72 122 80 Q132 90 128 105 Q124 120 112 128 Q100 132 98 118 Q95 100 103 85 Q98 70 105 55 Z" fill="#185FA5" opacity="0.28"/>
+        <!-- Asia-ish -->
+        <path d="M128 55 Q148 48 158 60 Q165 72 155 82 Q162 90 158 105 Q152 112 140 108 Q130 100 135 88 Q130 75 128 55 Z" fill="#185FA5" opacity="0.18"/>
+        <!-- Graticule hint (equator + prime meridian) -->
+        <line x1="35" y1="100" x2="165" y2="100" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.12" stroke-dasharray="3 3"/>
+        <line x1="100" y1="35" x2="100" y2="165" stroke="#185FA5" stroke-width="0.8" stroke-opacity="0.12" stroke-dasharray="3 3"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>C — Map abstraction</h3>
+      <p>Loose continent shapes inside a circle. Most literal "world map" reading. Feels editorial — like a magazine dataviz. Slightly busier than the others.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:24px">All three use the same blue (#185FA5) and bg (#E6F1FB) as the current Work card. Click your pick and reply in the terminal.</p>

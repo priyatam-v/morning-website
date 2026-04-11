@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Hero with Phone v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #F2F0EB;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #3D3D3A;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 0;
+    align-items: center;
+    max-width: 1040px;
+    width: 100%;
+    padding: 0 52px;
+    height: 100vh;
+  }
+
+  /* ── Left: text ── */
+  .hero-text { padding-right: 24px; }
+  .eyebrow {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #3D3D3A; opacity: 0.35; margin-bottom: 22px; font-weight: 700;
+  }
+  .headline {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(30px, 3.6vw, 44px);
+    line-height: 1.14; font-weight: 700;
+    color: #3D3D3A; margin-bottom: 16px;
+  }
+  .headline em { font-style: italic; color: #8BAF8C; font-weight: 400; }
+  .sub {
+    font-size: 15px; color: #3D3D3A; opacity: 0.5;
+    line-height: 1.7; margin-bottom: 34px; max-width: 380px;
+  }
+  .cta-btn {
+    display: inline-block; background: #3D3D3A; color: #F2F0EB;
+    font-size: 14px; font-weight: 600; padding: 13px 26px;
+    border-radius: 10px; border: none; cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .cta-btn:hover { background: #555; }
+
+  /* ── Right: phone + controls ── */
+  .hero-phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Up button sits above phone */
+  .nav-btn {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(61,61,58,0.18);
+    background: transparent;
+    color: #3D3D3A;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .nav-btn:hover { background: rgba(61,61,58,0.07); border-color: rgba(61,61,58,0.35); }
+  .nav-btn:disabled { opacity: 0.22; cursor: not-allowed; }
+  .nav-btn:disabled:hover { background: transparent; border-color: rgba(61,61,58,0.18); }
+
+  .nav-spacer { height: 12px; }
+
+  /* Phone shell — sized to feel like a supporting element, not dominant
+     Real iPhone aspect ratio ≈ 9:19.5. At ~390px viewport height budget:
+     height = 390px → width = 390 * (9/19.5) ≈ 180px
+     We use 400px tall, 185px wide — clearly a phone, not filling the canvas */
+  .phone {
+    width: 190px;
+    height: 410px;
+    background: #1a1917;
+    border-radius: 34px;
+    box-shadow:
+      0 0 0 1.5px #2d2d2a,
+      0 0 0 2.5px #1a1917,
+      0 24px 60px rgba(0,0,0,0.20),
+      0 6px 16px rgba(0,0,0,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .notch {
+    width: 64px; height: 17px;
+    background: #1a1917;
+    border-radius: 0 0 11px 11px;
+    margin-top: 6px; z-index: 10; flex-shrink: 0;
+  }
+  .screen {
+    flex: 1;
+    width: calc(100% - 7px);
+    margin: 3px;
+    border-radius: 29px;
+    overflow: hidden;
+    background: #F2F0EB;
+    position: relative;
+  }
+  .home-indicator {
+    width: 70px; height: 3px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+    margin-bottom: 8px; flex-shrink: 0;
+  }
+
+  /* Progress bar between phone and down button */
+  .progress-bar-wrap {
+    width: 190px;
+    height: 2px;
+    background: rgba(61,61,58,0.09);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 10px 0 10px;
+  }
+  .progress-bar {
+    height: 100%;
+    border-radius: 2px;
+    width: 0%;
+  }
+  @keyframes fillBar { from { width: 0%; } to { width: 100%; } }
+  .progress-bar.filling {
+    animation: fillBar var(--dur, 3.5s) linear forwards;
+  }
+
+  /* Dot indicators — between progress bar and down button */
+  .ctrl-dots {
+    display: flex; gap: 5px; align-items: center;
+    margin-bottom: 10px;
+  }
+  .ctrl-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(61,61,58,0.18);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .ctrl-dot.on {
+    width: 16px; border-radius: 3px;
+  }
+
+  /* Cards */
+  .card {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    background: #F2F0EB;
+    will-change: transform;
+  }
+  @keyframes slideOutUp   { from { transform: translateY(0);    } to { transform: translateY(-100%); } }
+  @keyframes slideOutDown { from { transform: translateY(0);    } to { transform: translateY(100%);  } }
+  @keyframes slideInUp    { from { transform: translateY(100%); } to { transform: translateY(0);     } }
+  @keyframes slideInDown  { from { transform: translateY(-100%);} to { transform: translateY(0);     } }
+
+  .exit-up    { animation: slideOutUp   0.38s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .exit-down  { animation: slideOutDown 0.38s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .enter-up   { animation: slideInUp    0.38s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .enter-down { animation: slideInDown  0.38s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+  .card-strip  { width: 100%; height: 3px; flex-shrink: 0; }
+  .card-illus  { width: 100%; height: 40%; flex-shrink: 0; overflow: hidden; }
+  .card-body   { padding: 8px 11px 0; flex: 1; overflow: hidden; }
+  .card-cat    { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 6.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+  .card-hook   { font-family: 'Petrona', Georgia, serif; font-size: 10.5px; line-height: 1.4; font-weight: 600; color: #3D3D3A; margin-bottom: 5px; }
+  .card-insight{ font-family: 'Petrona', Georgia, serif; font-size: 8px; line-height: 1.55; color: #3D3D3A; opacity: 0.6; }
+  .card-footer { padding: 6px 11px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(61,61,58,0.07); flex-shrink: 0; }
+  .card-mark   { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 6px; letter-spacing: 0.22em; color: #8BAF8C; font-weight: 700; }
+  .card-actions{ display: flex; gap: 4px; }
+  .card-btn    { font-size: 6.5px; padding: 3px 6px; border-radius: 100px; border: none; cursor: pointer; font-family: 'Plus Jakarta Sans'; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+
+  <!-- LEFT -->
+  <div class="hero-text">
+    <p class="eyebrow">Morning</p>
+    <p class="headline">Something<br>worth knowing.<br><em>Every morning.</em></p>
+    <p class="sub">One insight, drawn from science, economics, psychology and history. Finished before your coffee goes cold.</p>
+    <button class="cta-btn">Join the Waitlist</button>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="hero-phone">
+
+    <!-- Up arrow -->
+    <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" disabled title="Previous card">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+        <path d="M2 9.5L6.5 4l4.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="nav-spacer"></div>
+
+    <!-- Phone -->
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen" id="screen"></div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="ctrl-dots" id="ctrlDots"></div>
+
+    <!-- Down arrow -->
+    <button class="nav-btn" id="nextBtn" onclick="navigate(1)" title="Next card">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+        <path d="M2 3.5L6.5 9l4.5-5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+  </div>
+</div>
+
+<script>
+const AUTO_MS = 3500;
+const ANIM_MS = 380;
+
+const CARDS = [
+  {
+    category: 'Health', color: '#1D9E75', bg: '#E1F5EE',
+    type: 'Counterintuitive Fact',
+    hook: "Sleep is not rest. It's when your brain does its most important work.",
+    insight: "During deep sleep, the glymphatic system flushes toxic waste from the brain — including proteins linked to Alzheimer's.",
+    illus: (c,b) => `<svg viewBox="0 0 190 110" fill="none" style="width:100%;height:100%;"><rect width="190" height="110" fill="${b}"/><circle cx="95" cy="48" r="36" fill="${c}" opacity="0.10"/><ellipse cx="95" cy="82" rx="16" ry="22" fill="${c}" opacity="0.12"/><path d="M74 48 Q95 30 116 48" stroke="${c}" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.45"/><line x1="95" y1="48" x2="95" y2="82" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.28"/><path d="M95 68 L76 80" stroke="${c}" stroke-width="1.6" stroke-linecap="round" opacity="0.22"/><path d="M95 68 L114 80" stroke="${c}" stroke-width="1.6" stroke-linecap="round" opacity="0.22"/><circle cx="95" cy="48" r="8" fill="${c}" opacity="0.3"/></svg>`
+  },
+  {
+    category: 'Money', color: '#BA7517', bg: '#FAEEDA',
+    type: 'Mental Model',
+    hook: "The market pays for what's hard to replace, not what's hard to do.",
+    insight: "Effort and value aren't the same. A surgeon who takes 20 minutes on a 20-year skill doesn't charge for the minutes.",
+    illus: (c,b) => `<svg viewBox="0 0 190 110" fill="none" style="width:100%;height:100%;"><rect width="190" height="110" fill="${b}"/><rect x="18" y="68" width="20" height="34" rx="3" fill="${c}" opacity="0.2"/><rect x="46" y="54" width="20" height="48" rx="3" fill="${c}" opacity="0.32"/><rect x="74" y="38" width="20" height="64" rx="3" fill="${c}" opacity="0.46"/><rect x="102" y="22" width="20" height="80" rx="3" fill="${c}" opacity="0.62"/><path d="M28 66 L56 52 L84 36 L112 20" stroke="${c}" stroke-width="2" stroke-dasharray="4 3" opacity="0.4" fill="none"/><circle cx="112" cy="20" r="4" fill="${c}" opacity="0.7"/></svg>`
+  },
+  {
+    category: 'Psychology', color: '#993C1D', bg: '#FAECE7',
+    type: 'Mental Model',
+    hook: "You don't rise to your goals. You fall to the level of your systems.",
+    insight: "Goals tell you where to go. Systems determine if you get there. The difference is always the process.",
+    illus: (c,b) => `<svg viewBox="0 0 190 110" fill="none" style="width:100%;height:100%;"><rect width="190" height="110" fill="${b}"/><path d="M95 100 C62 100 40 84 40 64 C40 46 52 38 64 36 C64 22 74 10 95 10 C116 10 126 22 126 36 C138 38 150 46 150 64 C150 84 128 100 95 100Z" fill="${c}" opacity="0.09" stroke="${c}" stroke-width="1.5" stroke-opacity="0.18"/><path d="M78 60 Q86 52 95 56 Q104 52 112 60" stroke="${c}" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.38"/><circle cx="95" cy="74" r="8" fill="${c}" opacity="0.14" stroke="${c}" stroke-width="1.5" stroke-opacity="0.25"/></svg>`
+  },
+  {
+    category: 'Tech', color: '#534AB7', bg: '#EEEDFE',
+    type: 'Concept Explained',
+    hook: "AI doesn't think. It predicts — and that distinction changes everything.",
+    insight: "LLMs predict the next likely word, over and over. No reasoning, no understanding. Just pattern.",
+    illus: (c,b) => `<svg viewBox="0 0 190 110" fill="none" style="width:100%;height:100%;"><rect width="190" height="110" fill="${b}"/><circle cx="95" cy="55" r="44" stroke="${c}" stroke-width="1.5" opacity="0.14" fill="none"/><circle cx="95" cy="55" r="28" stroke="${c}" stroke-width="1.5" opacity="0.2" fill="none"/><circle cx="95" cy="55" r="13" fill="${c}" opacity="0.18"/><circle cx="95" cy="55" r="5" fill="${c}" opacity="0.55"/><line x1="95" y1="11" x2="95" y2="3" stroke="${c}" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/><line x1="139" y1="55" x2="147" y2="55" stroke="${c}" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/><line x1="95" y1="99" x2="95" y2="107" stroke="${c}" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/><line x1="51" y1="55" x2="43" y2="55" stroke="${c}" stroke-width="2.2" stroke-linecap="round" opacity="0.4"/></svg>`
+  },
+  {
+    category: 'World', color: '#185FA5', bg: '#E6F1FB',
+    type: 'Historical Lens',
+    hook: "Every border on a map was drawn by someone with an army.",
+    insight: "The world's political geography is not natural — it's the residue of wars, treaties, and empire.",
+    illus: (c,b) => `<svg viewBox="0 0 190 110" fill="none" style="width:100%;height:100%;"><rect width="190" height="110" fill="${b}"/><line x1="95" y1="55" x2="42" y2="24" stroke="${c}" stroke-width="1.1" stroke-opacity="0.2"/><line x1="95" y1="55" x2="150" y2="26" stroke="${c}" stroke-width="1.1" stroke-opacity="0.2"/><line x1="95" y1="55" x2="154" y2="80" stroke="${c}" stroke-width="1.1" stroke-opacity="0.2"/><line x1="95" y1="55" x2="38" y2="82" stroke="${c}" stroke-width="1.1" stroke-opacity="0.2"/><line x1="95" y1="55" x2="95" y2="10" stroke="${c}" stroke-width="1.1" stroke-opacity="0.2"/><line x1="42" y1="24" x2="150" y2="26" stroke="${c}" stroke-width="0.7" stroke-opacity="0.1"/><line x1="150" y1="26" x2="154" y2="80" stroke="${c}" stroke-width="0.7" stroke-opacity="0.1"/><line x1="154" y1="80" x2="38" y2="82" stroke="${c}" stroke-width="0.7" stroke-opacity="0.1"/><line x1="38" y1="82" x2="42" y2="24" stroke="${c}" stroke-width="0.7" stroke-opacity="0.1"/><circle cx="95" cy="55" r="10" fill="${c}" opacity="0.16"/><circle cx="95" cy="55" r="4" fill="${c}" opacity="0.55"/><circle cx="42" cy="24" r="5" fill="${c}" opacity="0.28"/><circle cx="150" cy="26" r="5" fill="${c}" opacity="0.28"/><circle cx="154" cy="80" r="5" fill="${c}" opacity="0.28"/><circle cx="38" cy="82" r="5" fill="${c}" opacity="0.28"/><circle cx="95" cy="10" r="4" fill="${c}" opacity="0.2"/></svg>`
+  },
+];
+
+let current = 0;
+let animating = false;
+let autoTimer = null;
+
+function buildCard(idx) {
+  const c = CARDS[idx];
+  return `
+    <div class="card-strip" style="background:${c.color};"></div>
+    <div class="card-illus">${c.illus(c.color, c.bg)}</div>
+    <div class="card-body">
+      <p class="card-cat" style="color:${c.color};">${c.type} · ${c.category}</p>
+      <p class="card-hook">${c.hook}</p>
+      <p class="card-insight">${c.insight}</p>
+    </div>
+    <div class="card-footer">
+      <span class="card-mark">MORNING</span>
+      <div class="card-actions">
+        <button class="card-btn" style="background:${c.bg};color:${c.color};">Helpful</button>
+        <button class="card-btn" style="background:rgba(61,61,58,0.08);color:#3D3D3A;opacity:0.5;">Save</button>
+      </div>
+    </div>
+  `;
+}
+
+function updateControls() {
+  const wrap = document.getElementById('ctrlDots');
+  wrap.innerHTML = CARDS.map((c, i) =>
+    `<div class="ctrl-dot${i === current ? ' on' : ''}"
+          style="${i === current ? `background:${CARDS[current].color};` : ''}"
+          onclick="goTo(${i})"></div>`
+  ).join('');
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === CARDS.length - 1;
+}
+
+function startBar() {
+  const bar = document.getElementById('progressBar');
+  bar.className = 'progress-bar';
+  bar.style.width = '0%';
+  bar.style.background = CARDS[current].color;
+  void bar.offsetWidth;
+  bar.style.setProperty('--dur', AUTO_MS + 'ms');
+  bar.className = 'progress-bar filling';
+}
+
+function scheduleAuto() {
+  clearTimeout(autoTimer);
+  startBar();
+  autoTimer = setTimeout(() => {
+    const next = (current + 1) % CARDS.length;
+    doNavigate(current, next, 1);
+  }, AUTO_MS);
+}
+
+function doNavigate(from, to, dir) {
+  if (animating || to === from) return;
+  animating = true;
+
+  const screen = document.getElementById('screen');
+  const outgoing = screen.querySelector('.card');
+  outgoing.classList.add(dir > 0 ? 'exit-up' : 'exit-down');
+
+  const incoming = document.createElement('div');
+  incoming.className = 'card ' + (dir > 0 ? 'enter-up' : 'enter-down');
+  incoming.innerHTML = buildCard(to);
+  screen.appendChild(incoming);
+
+  current = to;
+  updateControls();
+
+  setTimeout(() => {
+    outgoing.remove();
+    animating = false;
+    scheduleAuto();
+  }, ANIM_MS);
+}
+
+function navigate(dir) {
+  const next = current + dir;
+  if (next < 0 || next >= CARDS.length) return;
+  clearTimeout(autoTimer);
+  doNavigate(current, next, dir);
+}
+
+function goTo(idx) {
+  if (idx === current) return;
+  clearTimeout(autoTimer);
+  doNavigate(current, idx, idx > current ? 1 : -1);
+}
+
+// Init
+const screen = document.getElementById('screen');
+const init = document.createElement('div');
+init.className = 'card';
+init.innerHTML = buildCard(0);
+screen.appendChild(init);
+updateControls();
+scheduleAuto();
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowUp')   navigate(-1);
+});
+</script>
+</body>
+</html>

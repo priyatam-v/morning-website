@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Philosophy Variations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1C1C1A;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #F2F0EB;
+    padding: 48px 32px 80px;
+  }
+
+  h1 { font-family: 'Petrona', Georgia, serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .page-sub { color: #555; font-size: 13px; margin-bottom: 52px; line-height: 1.6; max-width: 560px; }
+  .var-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; margin-bottom: 16px; font-weight: 700; }
+  .var-label span { color: #8BAF8C; }
+  .block { margin-bottom: 64px; }
+  .note { margin-top: 16px; font-size: 12px; color: #555; line-height: 1.6; }
+  .note strong { color: #777; }
+  .replay-hint { font-size: 11px; color: #444; margin-top: 10px; text-align: center; }
+
+  /* Shared panel */
+  .panel {
+    background: #F2F0EB;
+    border-radius: 20px;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 72px 80px;
+    cursor: pointer;
+  }
+  .inner { max-width: 600px; width: 100%; }
+
+  /* Shared eyebrow */
+  .eyebrow {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #C4856A; margin-bottom: 44px;
+  }
+
+  /* Shared line animation */
+  .anim { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .go .anim { opacity: 1; transform: translateY(0); }
+
+  /* ── VAR 1: Refined current structure ── */
+  .v1-strong { font-family: 'Petrona', Georgia, serif; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.45; font-weight: 600; color: #3D3D3A; }
+  .v1-muted  { font-family: 'Petrona', Georgia, serif; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.45; font-weight: 400; color: rgba(61,61,58,0.5); }
+  .v1-italic { font-family: 'Petrona', Georgia, serif; font-size: clamp(18px, 2.2vw, 24px); line-height: 1.45; font-style: italic; font-weight: 400; color: rgba(61,61,58,0.38); }
+  .v1-spacer { height: 24px; }
+
+  /* ── VAR 2: Bold sparse, fewer lines ── */
+  .v2-line {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.35; font-weight: 600; color: #3D3D3A;
+    margin-bottom: 20px;
+  }
+  .v2-line:last-child { margin-bottom: 0; }
+  .v2-line em { font-style: italic; font-weight: 400; color: #8BAF8C; }
+  .v2-line.muted { font-weight: 400; color: rgba(61,61,58,0.45); font-size: clamp(20px, 2.4vw, 28px); }
+
+  /* ── VAR 3: Provocation → resolution ── */
+  .v3-provoke {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.22; font-weight: 700; color: #3D3D3A;
+    margin-bottom: 20px;
+  }
+  .v3-bridge {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(15px, 1.8vw, 18px);
+    line-height: 1.7; color: rgba(61,61,58,0.5);
+    margin-bottom: 40px; max-width: 480px;
+  }
+  .v3-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .v3-pill {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px; font-weight: 600;
+    padding: 8px 16px; border-radius: 100px;
+    border: 1.5px solid rgba(61,61,58,0.15);
+    color: rgba(61,61,58,0.6);
+  }
+  .v3-pill.on { background: #3D3D3A; color: #F2F0EB; border-color: #3D3D3A; }
+
+  /* ── VAR 4: Declaration / principles ── */
+  .v4-wrap { display: flex; flex-direction: column; gap: 0; }
+  .v4-line {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(26px, 3.2vw, 36px);
+    line-height: 1.3; padding: 18px 0;
+    border-bottom: 1px solid rgba(61,61,58,0.08);
+    display: flex; align-items: baseline; gap: 16px;
+  }
+  .v4-line:last-child { border-bottom: none; }
+  .v4-num {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px; font-weight: 700; color: rgba(61,61,58,0.25);
+    letter-spacing: 0.1em; flex-shrink: 0; padding-top: 4px; width: 18px;
+  }
+  .v4-text { font-weight: 600; color: #3D3D3A; }
+  .v4-text em { font-style: italic; font-weight: 400; color: #8BAF8C; }
+  .v4-text.muted { font-weight: 400; color: rgba(61,61,58,0.45); }
+</style>
+</head>
+<body>
+
+<h1>Philosophy — Four variations</h1>
+<p class="page-sub">Click any panel to replay the animation. All keep the stagger — it's earned.</p>
+
+<!-- ── VARIATION 1: Refined current ── -->
+<div class="block">
+  <p class="var-label">Variation <span>1</span> — Refined current structure</p>
+  <div class="panel" id="p1" onclick="replay('p1')">
+    <div class="inner" id="i1">
+      <p class="eyebrow anim" style="--d:0ms">Our philosophy</p>
+      <p class="v1-strong anim" style="--d:80ms">Your attention is the only resource that doesn't renew.</p>
+      <p class="v1-muted  anim" style="--d:160ms">No streaks turning curiosity into obligation.</p>
+      <p class="v1-muted  anim" style="--d:240ms">No feed engineered to outlast your willpower.</p>
+      <p class="v1-strong anim" style="--d:320ms">Five ideas worth knowing. Finished.</p>
+      <p class="v1-italic anim" style="--d:400ms">The way good things have always worked.</p>
+      <div class="v1-spacer anim" style="--d:460ms"></div>
+      <p class="v1-muted  anim" style="--d:520ms">Knowledge that compounds. Slowly. Reliably.</p>
+      <p class="v1-muted  anim" style="--d:600ms">The way the best things always have.</p>
+    </div>
+  </div>
+  <p class="replay-hint">↑ click to replay</p>
+  <p class="note"><strong>Closest to today.</strong> Fixes "ten things" → "five ideas." Replaces the opening line with something sharper — attention as a non-renewable resource. Everything else stays. Safe, coherent, on-brand.</p>
+</div>
+
+<!-- ── VARIATION 2: Bold and sparse ── -->
+<div class="block">
+  <p class="var-label">Variation <span>2</span> — Bold and sparse (fewer, heavier lines)</p>
+  <div class="panel" id="p2" onclick="replay('p2')">
+    <div class="inner" id="i2">
+      <p class="eyebrow anim" style="--d:0ms">Our philosophy</p>
+      <p class="v2-line anim" style="--d:100ms">The best ideas deserve more than a scroll.</p>
+      <p class="v2-line anim" style="--d:220ms">Morning gives you five — <em>then gets out of the way.</em></p>
+      <p class="v2-line muted anim" style="--d:340ms">No algorithm. No streak. No infinite.</p>
+      <p class="v2-line anim" style="--d:460ms">Just something worth knowing, <em>every day.</em></p>
+    </div>
+  </div>
+  <p class="replay-hint">↑ click to replay</p>
+  <p class="note"><strong>Most confident.</strong> Four lines, no filler. Each one earns its place. "Gets out of the way" is a strong product promise — rare in an industry that competes on engagement time. Punchy but risks feeling too short.</p>
+</div>
+
+<!-- ── VARIATION 3: Provocation → resolution ── -->
+<div class="block">
+  <p class="var-label">Variation <span>3</span> — Provocation that resolves into Morning</p>
+  <div class="panel" id="p3" onclick="replay('p3')">
+    <div class="inner" id="i3">
+      <p class="eyebrow anim" style="--d:0ms">Our philosophy</p>
+      <p class="v3-provoke anim" style="--d:100ms">You are not distracted.<br>You are <em style="color:#C4856A;font-style:italic;font-weight:400;">being</em> distracted.</p>
+      <p class="v3-bridge  anim" style="--d:260ms">There's a difference. One is a character flaw. The other is a design choice — made by people whose business depends on your attention never ending.</p>
+      <p class="v3-bridge  anim" style="--d:380ms">Morning is built on the opposite premise.</p>
+      <div class="v3-pills anim" style="--d:500ms">
+        <span class="v3-pill on">Finite by design</span>
+        <span class="v3-pill on">No streaks</span>
+        <span class="v3-pill on">No feed</span>
+        <span class="v3-pill">Done when you're done</span>
+        <span class="v3-pill">Knowledge, not content</span>
+      </div>
+    </div>
+  </div>
+  <p class="replay-hint">↑ click to replay</p>
+  <p class="note"><strong>Most provocative.</strong> Opens with an accusation — but at the industry, not the reader. The distinction "distracted vs being distracted" is sharp. The pills at the end are a different format; could feel off-brand. Best if Morning wants to take a stronger stance.</p>
+</div>
+
+<!-- ── VARIATION 4: Numbered declarations ── -->
+<div class="block">
+  <p class="var-label">Variation <span>4</span> — Numbered declarations</p>
+  <div class="panel" id="p4" onclick="replay('p4')">
+    <div class="inner" id="i4">
+      <p class="eyebrow anim" style="--d:0ms">Our philosophy</p>
+      <div class="v4-wrap">
+        <div class="v4-line anim" style="--d:80ms">
+          <span class="v4-num">01</span>
+          <span class="v4-text">Attention is <em>finite.</em> Treat it that way.</span>
+        </div>
+        <div class="v4-line anim" style="--d:180ms">
+          <span class="v4-num">02</span>
+          <span class="v4-text muted">No streaks. No guilt. No algorithm.</span>
+        </div>
+        <div class="v4-line anim" style="--d:280ms">
+          <span class="v4-num">03</span>
+          <span class="v4-text">Five ideas. Done. <em>Every morning.</em></span>
+        </div>
+        <div class="v4-line anim" style="--d:380ms">
+          <span class="v4-num">04</span>
+          <span class="v4-text muted">Knowledge compounds. Slowly. Reliably.</span>
+        </div>
+        <div class="v4-line anim" style="--d:480ms">
+          <span class="v4-num">05</span>
+          <span class="v4-text">The way the best things <em>always have.</em></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="replay-hint">↑ click to replay</p>
+  <p class="note"><strong>Most structured.</strong> Numbered lines feel like principles, not poetry. The numbers add visual rhythm without cluttering. Strong/muted alternation still creates hierarchy. Familiar editorial format — think annual reports, manifestos, design principles pages.</p>
+</div>
+
+<p style="font-size:13px;color:#444;text-align:center;margin-top:48px;">Pick a variation or mix elements across them. Click any panel to replay the animation.</p>
+
+<script>
+  // Apply --d as transition-delay
+  document.querySelectorAll('.anim').forEach(el => {
+    const d = el.style.getPropertyValue('--d') || '0ms';
+    el.style.transitionDelay = d;
+  });
+
+  function replay(panelId) {
+    const inner = document.getElementById(panelId.replace('p','i'));
+    inner.classList.remove('go');
+    void inner.offsetWidth;
+    setTimeout(() => inner.classList.add('go'), 30);
+  }
+
+  // Auto-play all on load
+  setTimeout(() => {
+    ['i1','i2','i3','i4'].forEach((id, idx) => {
+      setTimeout(() => {
+        document.getElementById(id).classList.add('go');
+      }, idx * 200);
+    });
+  }, 300);
+</script>
+</body>
+</html>

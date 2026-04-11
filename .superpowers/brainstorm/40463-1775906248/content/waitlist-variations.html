@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Waitlist Variations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1C1C1A;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #F2F0EB;
+    padding: 48px 32px 80px;
+  }
+
+  h1 { font-family: 'Petrona', Georgia, serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .page-sub { color: #555; font-size: 13px; margin-bottom: 52px; line-height: 1.6; max-width: 560px; }
+  .var-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; margin-bottom: 16px; font-weight: 700; }
+  .var-label span { color: #8BAF8C; }
+  .block { margin-bottom: 72px; }
+  .note { margin-top: 16px; font-size: 12px; color: #555; line-height: 1.6; }
+  .note strong { color: #777; }
+
+  /* ══════════════════════════════════════
+     VARIATION A — Centered, editorial, dark
+     Strong headline. One clean form.
+  ══════════════════════════════════════ */
+  .va {
+    background: #2B2B28;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .va-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 48px 72px;
+  }
+  .va-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #8BAF8C; margin-bottom: 28px;
+  }
+  .va-heading {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 600; line-height: 1.2;
+    color: #F2F0EB; margin-bottom: 16px;
+  }
+  .va-heading em { font-style: italic; font-weight: 400; color: #8BAF8C; }
+  .va-sub {
+    font-size: 15px; color: rgba(242,240,235,0.45);
+    line-height: 1.7; max-width: 400px; margin-bottom: 44px;
+  }
+  .va-form {
+    display: flex; gap: 10px; width: 100%; max-width: 460px; justify-content: center;
+  }
+  .va-input {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; color: #F2F0EB;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 14px 22px;
+    outline: none; flex: 1; min-width: 0;
+  }
+  .va-input::placeholder { color: rgba(242,240,235,0.25); }
+  .va-btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600; font-size: 13px;
+    color: #2B2B28; background: #F2F0EB;
+    border: none; border-radius: 100px;
+    padding: 14px 24px; cursor: pointer; white-space: nowrap;
+  }
+  .va-footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .va-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 18px; font-weight: 600; color: #F2F0EB;
+  }
+  .va-logo-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #8BAF8C; vertical-align: top; margin-top: 4px; }
+  .va-links { display: flex; gap: 20px; }
+  .va-link {
+    font-size: 12px; color: rgba(242,240,235,0.3);
+    text-decoration: none;
+  }
+
+  /* ══════════════════════════════════════
+     VARIATION B — Split: left copy / right form
+  ══════════════════════════════════════ */
+  .vb {
+    background: #2B2B28;
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
+  }
+  .vb-left {
+    padding: 72px 56px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .vb-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #C4856A; margin-bottom: 28px;
+  }
+  .vb-heading {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(26px, 2.8vw, 36px);
+    font-weight: 600; line-height: 1.3;
+    color: #F2F0EB; margin-bottom: 20px;
+  }
+  .vb-heading em { font-style: italic; font-weight: 400; color: #8BAF8C; }
+  .vb-body {
+    font-size: 14px; line-height: 1.75; color: rgba(242,240,235,0.4);
+    max-width: 340px;
+  }
+  .vb-right {
+    padding: 72px 56px;
+    display: flex; flex-direction: column; justify-content: center; gap: 20px;
+  }
+  .vb-promise {
+    display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px;
+  }
+  .vb-pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .vb-pill {
+    font-size: 11px; font-weight: 600;
+    padding: 6px 14px; border-radius: 100px;
+    border: 1.5px solid rgba(242,240,235,0.12);
+    color: rgba(242,240,235,0.45);
+  }
+  .vb-input {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; color: #F2F0EB;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 18px;
+    outline: none; width: 100%;
+  }
+  .vb-input::placeholder { color: rgba(242,240,235,0.22); }
+  .vb-btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600; font-size: 13px;
+    color: #2B2B28; background: #8BAF8C;
+    border: none; border-radius: 12px;
+    padding: 14px 18px; cursor: pointer; width: 100%;
+    letter-spacing: 0.02em;
+  }
+  .vb-fine {
+    font-size: 11px; color: rgba(242,240,235,0.2); line-height: 1.6;
+    text-align: center;
+  }
+  .vb-footer {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 56px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .vb-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 16px; font-weight: 600; color: #F2F0EB;
+  }
+  .vb-logo-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #8BAF8C; vertical-align: top; margin-top: 3px; }
+  .vb-flinks { display: flex; gap: 20px; }
+  .vb-flink { font-size: 11px; color: rgba(242,240,235,0.3); text-decoration: none; }
+
+  /* ══════════════════════════════════════
+     VARIATION C — Light background, warm and inviting
+  ══════════════════════════════════════ */
+  .vc {
+    background: #F2F0EB;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .vc-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 88px 48px 72px;
+  }
+  .vc-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #C4856A; margin-bottom: 28px;
+  }
+  .vc-heading {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(30px, 3.8vw, 46px);
+    font-weight: 600; line-height: 1.18;
+    color: #3D3D3A; margin-bottom: 16px;
+  }
+  .vc-heading em { font-style: italic; font-weight: 400; color: #8BAF8C; }
+  .vc-sub {
+    font-size: 15px; color: rgba(61,61,58,0.45);
+    line-height: 1.7; max-width: 360px; margin-bottom: 44px;
+  }
+  .vc-form {
+    display: flex; gap: 10px; width: 100%; max-width: 440px;
+  }
+  .vc-input {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; color: #3D3D3A;
+    background: rgba(61,61,58,0.06);
+    border: 1.5px solid rgba(61,61,58,0.12);
+    border-radius: 100px;
+    padding: 13px 22px;
+    outline: none; flex: 1; min-width: 0;
+  }
+  .vc-input::placeholder { color: rgba(61,61,58,0.28); }
+  .vc-btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600; font-size: 13px;
+    color: #F2F0EB; background: #3D3D3A;
+    border: none; border-radius: 100px;
+    padding: 13px 22px; cursor: pointer; white-space: nowrap;
+  }
+  .vc-footer {
+    background: #3D3D3A;
+    padding: 28px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .vc-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 16px; font-weight: 600; color: #F2F0EB;
+  }
+  .vc-logo-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #8BAF8C; vertical-align: top; margin-top: 3px; }
+  .vc-tagline {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 12px; font-style: italic; font-weight: 400;
+    color: rgba(242,240,235,0.35);
+  }
+  .vc-flinks { display: flex; gap: 20px; }
+  .vc-flink { font-size: 11px; color: rgba(242,240,235,0.3); text-decoration: none; }
+
+  /* ══════════════════════════════════════
+     VARIATION D — Full dark, bold single statement
+     Minimal. Confident. Just the essentials.
+  ══════════════════════════════════════ */
+  .vd {
+    background: #1A1A18;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  .vd-glow {
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(139,175,140,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+  }
+  .vd-body {
+    position: relative; z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 96px 48px 80px;
+  }
+  .vd-heading {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600; line-height: 1.15;
+    color: #F2F0EB; margin-bottom: 12px; letter-spacing: -0.01em;
+  }
+  .vd-heading em { font-style: italic; font-weight: 400; color: #8BAF8C; }
+  .vd-sub {
+    font-size: 15px; color: rgba(242,240,235,0.35);
+    line-height: 1.7; margin-bottom: 52px;
+  }
+  .vd-form {
+    display: flex; gap: 10px; width: 100%; max-width: 420px;
+  }
+  .vd-input {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; color: #F2F0EB;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 100px;
+    padding: 14px 22px;
+    outline: none; flex: 1; min-width: 0;
+  }
+  .vd-input::placeholder { color: rgba(242,240,235,0.2); }
+  .vd-btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600; font-size: 13px;
+    color: #1A1A18; background: #8BAF8C;
+    border: none; border-radius: 100px;
+    padding: 14px 22px; cursor: pointer; white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  .vd-footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 22px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .vd-manifesto {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(242,240,235,0.15);
+  }
+  .vd-logo {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: 16px; font-weight: 600; color: rgba(242,240,235,0.6);
+  }
+  .vd-logo-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #8BAF8C; vertical-align: top; margin-top: 3px; }
+  .vd-flinks { display: flex; gap: 20px; }
+  .vd-flink { font-size: 11px; color: rgba(242,240,235,0.25); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<h1>Waitlist — Four variations</h1>
+<p class="page-sub">Different tones, layouts, and background treatments. All fix the weak current copy.</p>
+
+<!-- ══ VARIATION A ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>A</span> — Dark, centered, clean. Echo of the hero.</p>
+  <div class="va">
+    <div class="va-body">
+      <p class="va-eyebrow">Coming soon</p>
+      <h2 class="va-heading">Something worth knowing.<br><em>Every morning.</em></h2>
+      <p class="va-sub">Morning is almost ready. Be the first to know when it launches.</p>
+      <div class="va-form">
+        <input class="va-input" type="email" placeholder="your@email.com"/>
+        <button class="va-btn">Notify me</button>
+      </div>
+    </div>
+    <div class="va-footer">
+      <span class="va-logo">Morn<span class="va-logo-dot"></span>ng</span>
+      <div class="va-links">
+        <a class="va-link" href="#">hello@getmorning.co</a>
+        <a class="va-link" href="#">@getmorning.co</a>
+      </div>
+    </div>
+  </div>
+  <p class="note"><strong>Bookends the page.</strong> The hero opens with "Something worth knowing. Every morning." — closing with the same line creates a satisfying loop. The dark tone is a natural contrast to the light Worlds section above. CTA "Notify me" is direct, low-pressure, honest.</p>
+</div>
+
+<!-- ══ VARIATION B ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>B</span> — Split: manifesto left, form right</p>
+  <div class="vb">
+    <div class="vb-left">
+      <p class="vb-eyebrow">Join the list</p>
+      <p class="vb-heading">Good mornings<br>don't happen <em>by accident.</em></p>
+      <p class="vb-body" style="margin-top:16px;">Morning gives you five ideas worth knowing — then gets out of the way. No algorithm. No streak. Just something real, every day.</p>
+    </div>
+    <div class="vb-right">
+      <div class="vb-promise">
+        <div class="vb-pill-row">
+          <span class="vb-pill">No spam</span>
+          <span class="vb-pill">Launch notification only</span>
+          <span class="vb-pill">Unsubscribe anytime</span>
+        </div>
+      </div>
+      <input class="vb-input" type="email" placeholder="your@email.com"/>
+      <button class="vb-btn">Reserve my spot</button>
+      <p class="vb-fine">We'll reach out once — when Morning is ready.</p>
+    </div>
+    <div class="vb-footer">
+      <span class="vb-logo">Morn<span class="vb-logo-dot"></span>ng</span>
+      <div class="vb-flinks">
+        <a class="vb-flink" href="#">hello@getmorning.co</a>
+        <a class="vb-flink" href="#">@getmorning.co on Instagram</a>
+      </div>
+    </div>
+  </div>
+  <p class="note"><strong>Most persuasive.</strong> The left side earns trust with the manifesto pitch. The right side handles objections ("no spam", "one email only") before the user even thinks to ask. "Reserve my spot" creates mild scarcity without lying. Split layout feels more like a product page.</p>
+</div>
+
+<!-- ══ VARIATION C ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>C</span> — Light section, warm contrast to Worlds above</p>
+  <div class="vc">
+    <div class="vc-body">
+      <p class="vc-eyebrow">Join the waitlist</p>
+      <h2 class="vc-heading">Your mornings are<br>about to <em>get better.</em></h2>
+      <p class="vc-sub">Morning is launching soon. Leave your email — we'll let you know the moment it's ready.</p>
+      <div class="vc-form">
+        <input class="vc-input" type="email" placeholder="your@email.com"/>
+        <button class="vc-btn">Notify me</button>
+      </div>
+    </div>
+    <div class="vc-footer">
+      <span class="vc-logo">Morn<span class="vc-logo-dot"></span>ng</span>
+      <p class="vc-tagline">Learn something real today.</p>
+      <div class="vc-flinks">
+        <a class="vc-flink" href="#">hello@getmorning.co</a>
+        <a class="vc-flink" href="#">@getmorning.co</a>
+      </div>
+    </div>
+  </div>
+  <p class="note"><strong>Warmest tone.</strong> Light background keeps it feeling like a continuation of the page rather than a hard stop. "Your mornings are about to get better" is benefit-led. The dark footer creates a natural page ending. Familiar, safe, effective.</p>
+</div>
+
+<!-- ══ VARIATION D ══ -->
+<div class="block">
+  <p class="var-label">Variation <span>D</span> — Full dark, single bold statement. Minimal.</p>
+  <div class="vd">
+    <div class="vd-glow"></div>
+    <div class="vd-body">
+      <h2 class="vd-heading">The daily habit<br>worth <em>actually having.</em></h2>
+      <p class="vd-sub">Morning launches soon. One email when it's ready — nothing else.</p>
+      <div class="vd-form">
+        <input class="vd-input" type="email" placeholder="your@email.com"/>
+        <button class="vd-btn">I'm in</button>
+      </div>
+    </div>
+    <div class="vd-footer">
+      <p class="vd-manifesto">No streaks · No feed · No algorithm</p>
+      <span class="vd-logo">Morn<span class="vd-logo-dot"></span>ng</span>
+      <div class="vd-flinks">
+        <a class="vd-flink" href="#">hello@getmorning.co</a>
+        <a class="vd-flink" href="#">@getmorning.co</a>
+      </div>
+    </div>
+  </div>
+  <p class="note"><strong>Most confident.</strong> No eyebrow, no sub-label — just the headline. "I'm in" is the most casual, frictionless CTA of the four. The footer manifesto "No streaks · No feed · No algorithm" closes the page with a values statement rather than a copyright line. Feels premium.</p>
+</div>
+
+</body>
+</html>

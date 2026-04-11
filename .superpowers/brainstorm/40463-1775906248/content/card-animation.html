@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Card Animation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #F2F0EB;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #3D3D3A;
+    padding: 40px 28px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 { font-family: 'Petrona', Georgia, serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; text-align:center; }
+  .page-sub { color: #999; font-size: 13px; margin-bottom: 44px; text-align:center; max-width:500px; line-height:1.6; }
+
+  /* ── Phone shell ── */
+  .phone {
+    width: 280px;
+    height: 580px;
+    background: #1a1917;
+    border-radius: 42px;
+    box-shadow:
+      0 0 0 1.5px #2a2a27,
+      0 0 0 3px #1a1917,
+      0 32px 80px rgba(0,0,0,0.22),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .notch {
+    width: 86px; height: 22px;
+    background: #1a1917;
+    border-radius: 0 0 14px 14px;
+    margin-top: 8px; z-index: 10; flex-shrink: 0;
+  }
+  .screen {
+    flex: 1;
+    width: calc(100% - 8px);
+    margin: 4px;
+    border-radius: 36px;
+    overflow: hidden;
+    background: #F2F0EB;
+    position: relative;
+  }
+  .home-indicator {
+    width: 96px; height: 4px;
+    background: rgba(255,255,255,0.22);
+    border-radius: 2px;
+    margin-bottom: 10px; flex-shrink: 0;
+  }
+
+  /* ── Cards ── */
+  .card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: #F2F0EB;
+    will-change: transform;
+  }
+
+  /* Simultaneous slide animations */
+  @keyframes slideOutUp   { from { transform: translateY(0);     } to { transform: translateY(-100%); } }
+  @keyframes slideOutDown { from { transform: translateY(0);     } to { transform: translateY(100%);  } }
+  @keyframes slideInUp    { from { transform: translateY(100%);  } to { transform: translateY(0);     } }
+  @keyframes slideInDown  { from { transform: translateY(-100%); } to { transform: translateY(0);     } }
+
+  .exit-up   { animation: slideOutUp   0.42s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .exit-down { animation: slideOutDown 0.42s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .enter-up  { animation: slideInUp    0.42s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .enter-down{ animation: slideInDown  0.42s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+  .card-strip  { width: 100%; height: 3px; flex-shrink: 0; }
+  .card-illus  { width: 100%; height: 44%; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .card-dots   { display: flex; gap: 3px; justify-content: center; padding: 8px 0 5px; flex-shrink: 0; }
+  .card-dot    { width: 14px; height: 2.5px; border-radius: 2px; background: rgba(61,61,58,0.15); transition: all 0.3s ease; }
+  .card-dot.active { width: 20px; }
+  .card-body   { padding: 6px 14px 0; flex: 1; overflow: hidden; }
+  .card-cat    { font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .card-hook   { font-family: 'Petrona', Georgia, serif; font-size: 12px; line-height: 1.38; font-weight: 600; color: #3D3D3A; margin-bottom: 6px; }
+  .card-insight{ font-family: 'Petrona', Georgia, serif; font-size: 9px; line-height: 1.55; color: #3D3D3A; opacity: 0.6; }
+  .card-footer { padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(61,61,58,0.07); flex-shrink: 0; }
+  .card-wordmark { font-size: 7px; letter-spacing: 0.22em; color: #8BAF8C; font-weight: 600; }
+  .card-actions  { display: flex; gap: 5px; }
+  .card-btn { font-size: 7px; padding: 3px 8px; border-radius: 100px; border: none; cursor: pointer; font-family: 'Plus Jakarta Sans'; font-weight: 600; }
+
+  /* ── Controls ── */
+  .controls {
+    margin-top: 32px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .ctrl-btn {
+    background: #3D3D3A;
+    color: #F2F0EB;
+    border: none;
+    border-radius: 9px;
+    padding: 11px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .ctrl-btn:hover { background: #555; }
+  .ctrl-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .card-counter { font-size: 13px; color: #aaa; width: 60px; text-align: center; }
+
+  .hint {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #bbb;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Card slide animation</h1>
+<p class="page-sub">This is how it would feel — outgoing card slides fully out the top, incoming card pushes up from the bottom simultaneously. No fade, no cross-dissolve. Pure directional slide.</p>
+
+<div class="phone">
+  <div class="notch"></div>
+  <div class="screen" id="screen"></div>
+  <div class="home-indicator"></div>
+</div>
+
+<div class="controls">
+  <button class="ctrl-btn" id="prevBtn" onclick="navigate(-1)">← Prev</button>
+  <div class="card-counter" id="counter">1 / 4</div>
+  <button class="ctrl-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
+</div>
+<p class="hint">Use arrow keys too ↑ ↓</p>
+
+<script>
+const CARDS = [
+  {
+    category: 'Health', color: '#1D9E75', bg: '#E1F5EE',
+    type: 'Counterintuitive Fact',
+    hook: "Sleep is not rest. It's when your brain does its most important work.",
+    insight: "During deep sleep, the glymphatic system flushes toxic waste from the brain — including amyloid-beta, a protein linked to Alzheimer's. You cannot make up for lost sleep.",
+    illus: (c, b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><circle cx="140" cy="72" r="50" fill="${c}" opacity="0.10"/><ellipse cx="140" cy="122" rx="22" ry="30" fill="${c}" opacity="0.12"/><path d="M112 72 Q140 48 168 72" stroke="${c}" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/><line x1="140" y1="72" x2="140" y2="122" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.28"/><path d="M140 105 L112 120" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.25"/><path d="M140 105 L168 120" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.25"/><circle cx="140" cy="72" r="10" fill="${c}" opacity="0.3"/></svg>`
+  },
+  {
+    category: 'Money', color: '#BA7517', bg: '#FAEEDA',
+    type: 'Mental Model',
+    hook: "The market pays for what's hard to replace, not what's hard to do.",
+    insight: "Effort and value are not the same thing. A surgeon who takes 20 minutes on a procedure that took 20 years to master doesn't charge for the minutes.",
+    illus: (c, b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><rect x="30" y="100" width="30" height="50" rx="4" fill="${c}" opacity="0.2"/><rect x="72" y="80" width="30" height="70" rx="4" fill="${c}" opacity="0.3"/><rect x="114" y="58" width="30" height="92" rx="4" fill="${c}" opacity="0.45"/><rect x="156" y="35" width="30" height="115" rx="4" fill="${c}" opacity="0.6"/><path d="M45 98 L87 78 L129 56 L171 33" stroke="${c}" stroke-width="2.5" stroke-dasharray="5 4" opacity="0.4" fill="none"/><circle cx="171" cy="33" r="6" fill="${c}" opacity="0.7"/></svg>`
+  },
+  {
+    category: 'Psychology', color: '#993C1D', bg: '#FAECE7',
+    type: 'Mental Model',
+    hook: "You don't rise to the level of your goals. You fall to the level of your systems.",
+    insight: "Goals tell you where you want to go. Systems determine whether you get there. The same goal can be achieved by thousands of different people — the difference is the process they build.",
+    illus: (c, b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><path d="M140 148 C88 148 52 122 52 90 C52 62 70 50 90 47 C90 30 106 14 140 14 C174 14 190 30 190 47 C210 50 228 62 228 90 C228 122 192 148 140 148Z" fill="${c}" opacity="0.09" stroke="${c}" stroke-width="1.5" stroke-opacity="0.18"/><path d="M108 80 Q120 68 140 74 Q160 68 172 80" stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/><circle cx="140" cy="108" r="12" fill="${c}" opacity="0.14" stroke="${c}" stroke-width="1.5" stroke-opacity="0.25"/><path d="M110 120 Q124 140 140 134 Q156 140 170 120" stroke="${c}" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.2"/></svg>`
+  },
+  {
+    category: 'Tech', color: '#534AB7', bg: '#EEEDFE',
+    type: 'Concept Explained',
+    hook: "AI doesn't think. It predicts — and that distinction changes everything.",
+    insight: "Large language models work by predicting the most statistically likely next word, over and over. There is no reasoning. No understanding. Just pattern. Knowing this tells you exactly when to trust it.",
+    illus: (c, b) => `<svg viewBox="0 0 280 160" fill="none" style="width:100%;height:100%;"><rect width="280" height="160" fill="${b}"/><circle cx="140" cy="80" r="65" stroke="${c}" stroke-width="1.5" opacity="0.15" fill="none"/><circle cx="140" cy="80" r="42" stroke="${c}" stroke-width="1.5" opacity="0.2" fill="none"/><circle cx="140" cy="80" r="20" fill="${c}" opacity="0.18"/><circle cx="140" cy="80" r="8" fill="${c}" opacity="0.55"/><line x1="140" y1="15" x2="140" y2="3" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/><line x1="205" y1="80" x2="217" y2="80" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/><line x1="140" y1="145" x2="140" y2="157" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/><line x1="75" y1="80" x2="63" y2="80" stroke="${c}" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/><circle cx="140" cy="3" r="4" fill="${c}" opacity="0.4"/></svg>`
+  },
+];
+
+let current = 0;
+let animating = false;
+const ANIM_MS = 420;
+
+function buildCardHTML(idx) {
+  const c = CARDS[idx];
+  const dots = CARDS.map((_, i) =>
+    `<div class="card-dot${i === idx ? ' active' : ''}" style="${i === idx ? `background:${c.color};width:20px;` : ''}"></div>`
+  ).join('');
+
+  return `
+    <div class="card-strip" style="background:${c.color};"></div>
+    <div class="card-illus" style="background:${c.bg};">${c.illus(c.color, c.bg)}</div>
+    <div class="card-dots">${dots}</div>
+    <div class="card-body">
+      <p class="card-cat" style="color:${c.color};">${c.type} · ${c.category}</p>
+      <p class="card-hook">${c.hook}</p>
+      <p class="card-insight">${c.insight}</p>
+    </div>
+    <div class="card-footer">
+      <span class="card-wordmark">MORNING</span>
+      <div class="card-actions">
+        <button class="card-btn" style="background:${c.bg};color:${c.color};">Helpful</button>
+        <button class="card-btn" style="background:rgba(61,61,58,0.08);color:#3D3D3A;opacity:0.5;">Save</button>
+      </div>
+    </div>
+  `;
+}
+
+function updateCounter() {
+  document.getElementById('counter').textContent = `${current + 1} / ${CARDS.length}`;
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === CARDS.length - 1;
+}
+
+function navigate(dir) {
+  if (animating) return;
+  const next = current + dir;
+  if (next < 0 || next >= CARDS.length) return;
+
+  animating = true;
+  const screen = document.getElementById('screen');
+
+  // Build outgoing card (already in DOM as first child)
+  const outgoing = screen.querySelector('.card');
+  outgoing.classList.add(dir > 0 ? 'exit-up' : 'exit-down');
+
+  // Build incoming card, positioned off-screen
+  const incoming = document.createElement('div');
+  incoming.className = 'card ' + (dir > 0 ? 'enter-up' : 'enter-down');
+  incoming.innerHTML = buildCardHTML(next);
+  screen.appendChild(incoming);
+
+  current = next;
+  updateCounter();
+
+  setTimeout(() => {
+    if (outgoing.parentNode) outgoing.parentNode.removeChild(outgoing);
+    animating = false;
+  }, ANIM_MS);
+}
+
+// Init
+const screen = document.getElementById('screen');
+const initial = document.createElement('div');
+initial.className = 'card';
+initial.innerHTML = buildCardHTML(0);
+screen.appendChild(initial);
+updateCounter();
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') navigate(1);
+  if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  navigate(-1);
+});
+</script>
+</body>
+</html>

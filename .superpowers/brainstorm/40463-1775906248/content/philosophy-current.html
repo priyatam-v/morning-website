@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Morning — Philosophy (current)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #F2F0EB;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    color: #3D3D3A;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 32px;
+  }
+
+  .section {
+    max-width: 640px;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #C4856A;
+    margin-bottom: 48px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .lines { display: flex; flex-direction: column; gap: 0; }
+
+  .line {
+    font-family: 'Petrona', Georgia, serif;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.45;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .line-strong  { font-weight: 600; color: #3D3D3A; }
+  .line-muted   { font-weight: 400; color: rgba(61,61,58,0.55); }
+  .line-italic  { font-style: italic; font-weight: 400; color: rgba(61,61,58,0.45); }
+  .spacer       { height: 28px; }
+
+  /* Animate in on load to simulate the scroll trigger */
+  .visible .eyebrow,
+  .visible .line { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="section visible" id="section">
+
+  <p class="eyebrow" style="transition-delay: 0ms">What we believe</p>
+
+  <div class="lines">
+    <p class="line line-strong"  style="transition-delay: 80ms">Your attention is finite. So is Morning.</p>
+    <p class="line line-muted"   style="transition-delay: 160ms">No streaks turning curiosity into obligation.</p>
+    <p class="line line-muted"   style="transition-delay: 240ms">No feed engineered to outlast your willpower.</p>
+    <p class="line line-strong"  style="transition-delay: 320ms">Just ten things worth knowing. Finished.</p>
+    <p class="line line-italic"  style="transition-delay: 400ms">The way things used to be.</p>
+    <div class="spacer"          style="transition-delay: 480ms"></div>
+    <p class="line line-muted"   style="transition-delay: 560ms">Knowledge that compounds. Slowly. Reliably.</p>
+    <p class="line line-muted"   style="transition-delay: 640ms">The way the best things always have.</p>
+  </div>
+
+</div>
+
+<script>
+  // Replay animation on click
+  document.body.addEventListener('click', () => {
+    const s = document.getElementById('section');
+    s.classList.remove('visible');
+    void s.offsetWidth;
+    setTimeout(() => s.classList.add('visible'), 50);
+  });
+</script>
+
+</body>
+</html>

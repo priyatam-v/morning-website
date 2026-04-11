@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="morning-logo-pngs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/files/morning-logo-pngs.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
