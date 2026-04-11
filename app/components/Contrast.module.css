@@ -2,88 +2,82 @@
   height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background: var(--bg);
   padding: 0 2rem;
-  background: var(--bg-card);
 }
 
-.inner {
+.card {
+  background: #E8E4DC;
+  border-radius: 20px;
+  padding: 56px 64px;
   width: 100%;
-  max-width: 860px;
-  margin: 0 auto;
+  max-width: 780px;
+}
+
+.labelRow {
   display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  grid-template-columns: 1fr 40px 1fr;
+  margin-bottom: 24px;
 }
 
-.inner.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.col {
-  padding: 0 4rem;
-}
-
-.divider {
-  background: rgba(61, 61, 58, 0.1);
-  align-self: stretch;
-}
-
-/* Left column — muted entirely */
-.colLeft {
-  opacity: 0.28;
-}
-
-.colHeader {
+.labelBefore {
   font-family: var(--font-jakarta);
-  font-weight: 600;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 2rem;
+  letter-spacing: 1.8px;
+  color: rgba(61, 61, 58, 0.4);
 }
 
-.colLeft .colHeader {
-  color: var(--tertiary);
+.labelAfter {
+  font-family: var(--font-jakarta);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #8BAF8C;
+  padding-left: 16px;
 }
 
-.colRight .colHeader {
-  color: var(--primary);
+.row {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(61, 61, 58, 0.08);
 }
 
-.lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.row:last-child {
+  border-bottom: none;
 }
 
-.lines p {
+.before {
   font-family: var(--font-petrona);
-  font-weight: 400;
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  line-height: 1.4;
-  color: var(--tertiary);
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(61, 61, 58, 0.58);
+  padding-right: 16px;
 }
 
-/* Last line of right col carries the weight */
-.colRight .lines p:last-child {
+.arrow {
+  font-size: 14px;
+  color: rgba(61, 61, 58, 0.2);
+  text-align: center;
+  font-family: var(--font-jakarta);
+}
+
+.after {
+  font-family: var(--font-petrona);
+  font-size: 16px;
+  line-height: 1.55;
   font-weight: 600;
+  color: #3D3D3A;
+  padding-left: 16px;
 }
 
-@media (max-width: 680px) {
-  .inner {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1px auto;
-    gap: 0;
-  }
-  .divider {
-    height: 1px;
-    width: 100%;
-    margin: 2.5rem 0;
-  }
-  .col {
-    padding: 0 1.5rem;
-  }
+.after em {
+  color: #8BAF8C;
+  font-style: italic;
+  font-weight: 400;
 }
