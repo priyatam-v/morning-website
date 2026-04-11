@@ -3,59 +3,47 @@ import { useEffect, useRef } from 'react'
 import styles from './Philosophy.module.css'
 
 const LINES = [
-  { text: 'Your attention is finite. So is Morning.', strong: true },
-  { text: 'No streaks turning curiosity into obligation.', strong: false },
-  { text: 'No feed engineered to outlast your willpower.', strong: false },
-  { text: 'Just ten things worth knowing. Finished.', strong: true },
-  { text: 'The way things used to be.', strong: false, italic: true },
-  { text: '', spacer: true },
-  { text: 'Knowledge that compounds. Slowly. Reliably.', strong: false },
-  { text: 'The way the best things always have.', strong: false },
+  { num: '01', text: <>Attention is <em>finite.</em> Treat it that way.</>, strong: true },
+  { num: '02', text: 'No streaks. No guilt. No algorithm.', strong: false },
+  { num: '03', text: <>Five ideas. Done. <em>Every morning.</em></>, strong: true },
+  { num: '04', text: 'Knowledge compounds. Slowly. Reliably.', strong: false },
+  { num: '05', text: <>The way the best things <em>always have.</em></>, strong: true },
 ]
 
 export default function Philosophy() {
-  const ref = useRef<HTMLDivElement>(null)
-  const lineRefs = useRef<(HTMLParagraphElement | null)[]>([])
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          ref.current?.classList.add(styles.visible)
-          lineRefs.current.forEach((el, i) => {
-            if (el) {
-              setTimeout(() => el.classList.add(styles.lineVisible), i * 80)
-            }
-          })
-        }
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add(styles.visible)
+        })
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     )
-    if (ref.current) observer.observe(ref.current)
+    rowRefs.current.forEach(el => { if (el) observer.observe(el) })
     return () => observer.disconnect()
   }, [])
 
   return (
     <section className={styles.section}>
-      <div className={styles.inner} ref={ref}>
-        <p className={styles.eyebrow}>What we believe</p>
-        <div className={styles.lines}>
-          {LINES.map((line, i) => {
-            if (line.spacer) return <div key={i} className={styles.spacer} />
-            return (
-              <p
-                key={i}
-                ref={el => { lineRefs.current[i] = el }}
-                className={[
-                  styles.line,
-                  line.strong ? styles.lineStrong : styles.lineMuted,
-                  line.italic ? styles.lineItalic : '',
-                ].join(' ')}
-              >
+      <div className={styles.inner}>
+        <p className={styles.eyebrow}>Our philosophy</p>
+        <div className={styles.rows}>
+          {LINES.map((line, i) => (
+            <div
+              key={line.num}
+              ref={el => { rowRefs.current[i] = el }}
+              className={styles.row}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <span className={styles.num}>{line.num}</span>
+              <span className={`${styles.text} ${line.strong ? styles.strong : styles.muted}`}>
                 {line.text}
-              </p>
-            )
-          })}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
