@@ -18,6 +18,7 @@ const ROWS = [
 export default function Contrast() {
   return (
     <section className={styles.section}>
+      <p className={styles.eyebrow}>The difference</p>
       <div className={styles.card}>
         <div className={styles.labelRow}>
           <span className={styles.labelBefore}>Most mornings</span>
