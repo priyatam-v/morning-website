@@ -131,7 +131,7 @@
   gap: 0.625rem;
   font-family: var(--font-jakarta);
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   font-size: 1.0625rem;
   color: var(--primary);
 }

@@ -27,7 +27,7 @@
 }
 
 .headline em {
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   color: var(--primary);
 }
@@ -166,7 +166,7 @@
 
 .ctaBtn {
   font-family: var(--font-jakarta);
-  font-style: italic;
+  font-style: normal;
   font-size: 14px;
   font-weight: 400;
   color: rgba(61, 61, 58, 0.4);
