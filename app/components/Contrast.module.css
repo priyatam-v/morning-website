@@ -23,20 +23,20 @@
 
 .labelBefore {
   font-family: var(--font-jakarta);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(61, 61, 58, 0.4);
+  color: rgba(61, 61, 58, 0.6);
 }
 
 .labelAfter {
   font-family: var(--font-jakarta);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(61, 61, 58, 0.4);
+  color: rgba(61, 61, 58, 0.6);
   padding-left: 16px;
 }
 
@@ -62,7 +62,7 @@
 
 .arrow {
   font-size: 14px;
-  color: rgba(61, 61, 58, 0.2);
+  color: rgba(61, 61, 58, 0.35);
   text-align: center;
   font-family: var(--font-jakarta);
 }

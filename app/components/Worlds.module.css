@@ -23,11 +23,11 @@
 
 .heading {
   font-family: var(--font-jakarta);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(61, 61, 58, 0.4);
+  color: rgba(61, 61, 58, 0.6);
 }
 
 /* ─── Grid ─── */
@@ -90,7 +90,7 @@
 .worldCategory {
   font-family: var(--font-jakarta);
   font-weight: 700;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 6px;
@@ -109,8 +109,8 @@
 .worldDesc {
   font-family: var(--font-jakarta);
   font-weight: 400;
-  font-size: 11px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.6;
   color: rgba(61, 61, 58, 0.58);
 }
 
