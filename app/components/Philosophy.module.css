@@ -59,7 +59,7 @@
 }
 
 .text {
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-size: clamp(26px, 3.2vw, 36px);
   line-height: 1.3;
 }

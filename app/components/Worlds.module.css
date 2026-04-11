@@ -22,7 +22,7 @@
 }
 
 .heading {
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-size: clamp(22px, 2.5vw, 28px);
   font-weight: 600;
   color: var(--tertiary);
@@ -96,7 +96,7 @@
 }
 
 .worldName {
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-weight: 600;
   font-size: 16px;
   line-height: 1.2;

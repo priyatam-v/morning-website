@@ -18,7 +18,7 @@
 }
 
 .headline {
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-size: clamp(32px, 4vw, 54px);
   line-height: 1.18;
   font-weight: 600;
@@ -103,7 +103,7 @@
 }
 
 .cardHook {
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-size: 17px;
   font-weight: 600;
   line-height: 1.35;
@@ -165,7 +165,7 @@
 }
 
 .ctaBtn {
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-style: italic;
   font-size: 14px;
   font-weight: 400;

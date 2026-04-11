@@ -41,7 +41,7 @@
 
 /* Heading — same scale as other section headlines */
 .heading {
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-weight: 600;
   font-size: clamp(28px, 3.5vw, 40px);
   line-height: 1.25;
@@ -129,7 +129,7 @@
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  font-family: var(--font-petrona);
+  font-family: var(--font-jakarta);
   font-weight: 400;
   font-style: italic;
   font-size: 1.0625rem;
