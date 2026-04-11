@@ -5,7 +5,7 @@
   --bg: #F2F0EB;
   --bg-card: #E8E4DC;
   --font-petrona: 'Petrona', Georgia, serif;
-  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --font-jakarta: 'DM Sans', sans-serif;
 
   /* Category colors */
   --health: #1D9E75;
@@ -21,13 +21,17 @@
   padding: 0;
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   background-color: var(--bg);
   color: var(--tertiary);
   font-family: var(--font-jakarta);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 ::selection {

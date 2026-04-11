@@ -151,13 +151,7 @@ export default function Worlds() {
                 {world.category}
               </p>
               <h3 className={styles.worldName}>{world.name}</h3>
-              <div className={styles.worldLines}>
-                {world.lines.map((line, j) => (
-                  <p key={j} className={j === 1 ? styles.worldLine2 : styles.worldLine1}>
-                    {line}
-                  </p>
-                ))}
-              </div>
+              <p className={styles.worldDesc}>{world.lines.join(' ')}</p>
             </div>
           </div>
         ))}
