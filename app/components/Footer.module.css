@@ -22,38 +22,11 @@
 }
 
 .logo {
-  display: flex;
-  align-items: baseline;
-  position: relative;
-  user-select: none;
-}
-
-.logoText {
-  font-family: var(--font-petrona);
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: var(--bg);
-  letter-spacing: -0.01em;
-}
-
-.logoI {
-  font-family: var(--font-petrona);
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: var(--bg);
-  letter-spacing: -0.01em;
-}
-
-.logoDot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--primary);
-  vertical-align: top;
-  margin-top: 5px;
-  margin-left: -1px;
-  margin-right: -1px;
+  height: 20px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 
 .tagline {
