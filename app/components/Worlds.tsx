@@ -42,21 +42,26 @@ const WORLDS = [
     )
   },
   {
-    id: 'work',
-    name: 'The Work',
-    category: 'Career & Productivity',
+    id: 'world',
+    name: 'The World',
+    category: 'World',
     color: '#185FA5',
     bg: '#E6F1FB',
-    lines: ['Not hustle. Not hacks.', 'Systems that quietly compound over years.'],
+    lines: ['Geopolitics, history, science, society.', 'The forces shaping the world you wake up in.'],
     illustration: (color: string) => (
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="40" y="50" width="120" height="90" rx="8" fill={color} opacity="0.08" stroke={color} strokeWidth="1.5" strokeOpacity="0.2"/>
-        <rect x="55" y="70" width="90" height="6" rx="3" fill={color} opacity="0.25"/>
-        <rect x="55" y="85" width="70" height="5" rx="2.5" fill={color} opacity="0.18"/>
-        <rect x="55" y="98" width="80" height="5" rx="2.5" fill={color} opacity="0.18"/>
-        <rect x="55" y="111" width="50" height="5" rx="2.5" fill={color} opacity="0.12"/>
-        <circle cx="100" cy="160" r="18" fill={color} opacity="0.12" stroke={color} strokeWidth="1.5" strokeOpacity="0.25"/>
-        <path d="M93 160 L98 165 L108 154" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.5"/>
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="28" y1="28" x2="14" y2="17" stroke={color} strokeWidth="1" strokeOpacity="0.2"/>
+        <line x1="28" y1="28" x2="43" y2="18" stroke={color} strokeWidth="1" strokeOpacity="0.2"/>
+        <line x1="28" y1="28" x2="44" y2="36" stroke={color} strokeWidth="1" strokeOpacity="0.2"/>
+        <line x1="28" y1="28" x2="15" y2="40" stroke={color} strokeWidth="1" strokeOpacity="0.2"/>
+        <line x1="28" y1="28" x2="28" y2="11" stroke={color} strokeWidth="1" strokeOpacity="0.2"/>
+        <circle cx="28" cy="28" r="5" fill={color} opacity="0.2"/>
+        <circle cx="28" cy="28" r="2.5" fill={color} opacity="0.6"/>
+        <circle cx="14" cy="17" r="3.5" fill={color} opacity="0.3"/>
+        <circle cx="43" cy="18" r="3.5" fill={color} opacity="0.3"/>
+        <circle cx="44" cy="36" r="3.5" fill={color} opacity="0.3"/>
+        <circle cx="15" cy="40" r="3.5" fill={color} opacity="0.3"/>
+        <circle cx="28" cy="11" r="2.5" fill={color} opacity="0.22"/>
       </svg>
     )
   },
@@ -127,14 +132,7 @@ export default function Worlds() {
   return (
     <section className={styles.section}>
       <div className={styles.header} ref={ref}>
-        <p className={styles.eyebrow}>The Knowledge</p>
-        <h2 className={styles.heading}>
-          Morning draws from the domains<br />
-          <em>that actually shape a life.</em>
-        </h2>
-        <p className={styles.sub}>
-          Morning draws from five worlds of human knowledge. More worlds are being mapped.
-        </p>
+        <p className={styles.heading}>What Morning covers</p>
       </div>
 
       <div className={styles.grid}>
@@ -163,11 +161,6 @@ export default function Worlds() {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className={styles.footer}>
-        <p className={styles.footerLine}>Five worlds for now.</p>
-        <p className={styles.footerLine2}>More are being mapped.</p>
       </div>
     </section>
   )
