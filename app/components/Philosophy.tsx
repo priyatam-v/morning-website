@@ -1,8 +1,9 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import type { ReactNode } from 'react'
 import styles from './Philosophy.module.css'
 
-const LINES = [
+const LINES: { num: string; text: ReactNode; strong: boolean }[] = [
   { num: '01', text: <>Attention is <em>finite.</em> Treat it that way.</>, strong: true },
   { num: '02', text: 'No streaks. No guilt. No algorithm.', strong: false },
   { num: '03', text: <>Five ideas. Done. <em>Every morning.</em></>, strong: true },
