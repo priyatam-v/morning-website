@@ -1,4 +1,3 @@
-'use client'
 import styles from './Contrast.module.css'
 
 const ROWS = [
@@ -22,7 +21,7 @@ export default function Contrast() {
       <div className={styles.card}>
         <div className={styles.labelRow}>
           <span className={styles.labelBefore}>Most mornings</span>
-          <span className={styles.arrow} />
+          <span className={styles.arrowSpacer} />
           <span className={styles.labelAfter}>With Morning</span>
         </div>
         {ROWS.map((row, i) => (
