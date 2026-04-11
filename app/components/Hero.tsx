@@ -50,6 +50,7 @@ export default function Hero() {
   const [prev, setPrev] = useState<number | null>(null)
   const [animState, setAnimState] = useState<AnimState>('idle')
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const animTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isAnimating = useRef(false)
 
   const headlineRef = useRef<HTMLDivElement>(null)
@@ -72,25 +73,28 @@ export default function Hero() {
 
     if (timerRef.current) clearTimeout(timerRef.current)
 
-    setPrev(current)
     setAnimState(direction)
     setCurrent(c => {
+      setPrev(c)
       if (direction === 'next') return (c + 1) % CARDS.length
       return (c - 1 + CARDS.length) % CARDS.length
     })
 
-    setTimeout(() => {
+    if (animTimerRef.current) clearTimeout(animTimerRef.current)
+    animTimerRef.current = setTimeout(() => {
       setPrev(null)
       setAnimState('idle')
       isAnimating.current = false
     }, ANIMATION_MS)
-  }, [current])
+  }, [])
+
+  useEffect(() => () => { if (animTimerRef.current) clearTimeout(animTimerRef.current) }, [])
 
   // Auto-advance
   useEffect(() => {
     timerRef.current = setTimeout(() => navigate('next'), AUTO_ADVANCE_MS)
     return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [navigate, current])
+  }, [current, navigate])
 
   const currentCard = CARDS[current]
   const prevCard = prev !== null ? CARDS[prev] : null
