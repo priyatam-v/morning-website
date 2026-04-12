@@ -10,7 +10,7 @@ export default function Footer() {
             alt="Morning"
             className={styles.logo}
           />
-          <p className={styles.tagline}>Know more. Scroll less.</p>
+          <p className={styles.tagline}>Less noise, more signal.</p>
         </div>
 
         <div className={styles.right}>
