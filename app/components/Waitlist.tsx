@@ -29,11 +29,15 @@ export default function Waitlist() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
-      const data = await res.json()
       if (res.ok) {
         setSubmitted(true)
       } else {
-        setError(data.error ?? 'Something went wrong. Please try again.')
+        let message = 'Something went wrong. Please try again.'
+        try {
+          const data = await res.json()
+          if (typeof data?.error === 'string') message = data.error
+        } catch { /* ignore non-JSON error bodies */ }
+        setError(message)
       }
     } catch {
       setError('Something went wrong. Please try again.')
@@ -62,7 +66,7 @@ export default function Waitlist() {
                     id="waitlist-email"
                     type="email"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={e => { setEmail(e.target.value); if (error) setError(null) }}
                     placeholder="your@email.com"
                     className={styles.input}
                     required
@@ -72,7 +76,7 @@ export default function Waitlist() {
                   </button>
                 </form>
                 {error && (
-                  <p className={styles.error}>{error}</p>
+                  <p className={styles.error} role="alert">{error}</p>
                 )}
               </>
             ) : (
