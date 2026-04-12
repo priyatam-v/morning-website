@@ -82,7 +82,7 @@ export default function Waitlist() {
             ) : (
               <div className={styles.thanks}>
                 <span className={styles.thanksDot} />
-                You're in. We'll reach out when it's time.
+                You're in.
               </div>
             )}
           </div>
