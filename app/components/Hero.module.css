@@ -56,6 +56,49 @@
   gap: 16px;
 }
 
+/* ── Phone shell ── */
+.phone {
+  width: 280px;
+  height: 606px;
+  background: #1C1C1A;
+  border-radius: 44px;
+  position: relative;
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.08),
+    0 32px 80px rgba(0,0,0,0.35),
+    0 8px 20px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+/* Dynamic island */
+.island {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 26px;
+  background: #000;
+  border-radius: 13px;
+  z-index: 2;
+}
+
+/* Screen */
+.screen {
+  position: absolute;
+  inset: 8px;
+  border-radius: 38px;
+  background: #F2F0EB;
+  overflow: hidden;
+}
+
+/* Card slot inside screen */
+.cardSlot {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
 /* ── Card layout ── */
 .card {
   position: absolute;
@@ -247,6 +290,7 @@
   .right {
     order: 2;
     justify-content: flex-start;
+    gap: 10px;
   }
 
   .phone {
