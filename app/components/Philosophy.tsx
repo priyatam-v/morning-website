@@ -66,7 +66,6 @@ export default function Philosophy() {
             className={styles.row}
             style={{ '--row-delay': `${i * 120}ms` } as React.CSSProperties}
           >
-            <span className={styles.num}>{line.num}</span>
             <span className={styles.text}>{line.text}</span>
           </div>
         ))}

@@ -34,28 +34,13 @@
 
 /* ── Row ── */
 .row {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  align-items: baseline;
-  gap: 24px;
-  padding: 24px 0;
-  border-bottom: 1px solid rgba(61, 61, 58, 0.08);
-}
-
-.row:first-of-type {
-  border-top: 1px solid rgba(61, 61, 58, 0.08);
-}
-
-.num {
-  font-family: var(--font-jakarta);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: rgba(61, 61, 58, 0.35);
-  padding-top: 2px;
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
 }
 
 .text {
+  text-align: center;
   font-family: var(--font-jakarta);
   font-size: 18px;
   font-weight: 400;
@@ -80,28 +65,16 @@
     }
   }
 
-  /* Number slides in from left */
-  @keyframes numIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-
   /* Text unmasks left → right like a curtain pulling away */
   @keyframes textReveal {
     from { opacity: 0.2; clip-path: inset(0 100% 0 0); }
     to   { opacity: 1;   clip-path: inset(0 0%   0 0); }
   }
 
-  /* Hide sub-elements when .animate is added by JS */
-  .row.animate .num  { opacity: 0; transform: translateX(-20px); }
+  /* Hide text when .animate is added by JS */
   .row.animate .text { opacity: 0; clip-path: inset(0 100% 0 0); }
 
-  /* Trigger animations when observer fires .visible */
-  .row.visible .num {
-    animation: numIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: var(--row-delay, 0ms);
-  }
-
+  /* Trigger animation when observer fires .visible */
   .row.visible .text {
     animation: textReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     animation-delay: calc(var(--row-delay, 0ms) + 160ms);
@@ -119,9 +92,7 @@
   }
 
   .row {
-    grid-template-columns: 32px 1fr;
-    gap: 16px;
-    padding: 20px 0;
+    padding: 14px 0;
   }
 
   .text {
@@ -132,6 +103,5 @@
 /* Reduced motion: content always visible, no hiding */
 @media (prefers-reduced-motion: reduce) {
   .eyebrow { opacity: 1; transform: none; filter: none; }
-  .row.animate .num  { opacity: 1; transform: none; }
   .row.animate .text { opacity: 1; clip-path: none; }
 }
