@@ -149,29 +149,6 @@
   overflow: hidden;
 }
 
-/* LEARN MORE vertical label */
-.learnMoreWrap {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.learnMore {
-  transform: rotate(90deg);
-  white-space: nowrap;
-  font-family: var(--font-jakarta);
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #2D5A2A;
-  font-weight: 700;
-}
 
 /* Bottom content card */
 .cardContent {

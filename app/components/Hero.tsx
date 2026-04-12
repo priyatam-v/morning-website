@@ -73,9 +73,6 @@ function CardFace({
       {/* Visual */}
       <div className={styles.cardVisual}>
         <Visual />
-        <div className={styles.learnMoreWrap}>
-          <span className={styles.learnMore}>Learn More</span>
-        </div>
       </div>
       {/* Content */}
       <div className={styles.cardContent}>
