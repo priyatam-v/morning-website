@@ -166,7 +166,7 @@
   transform: rotate(90deg);
   white-space: nowrap;
   font-family: var(--font-jakarta);
-  font-size: 6px;
+  font-size: 8px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #2D5A2A;
@@ -190,7 +190,7 @@
   border-radius: 20px;
   background: rgba(45, 90, 42, 0.08);
   font-family: var(--font-jakarta);
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -200,7 +200,7 @@
 
 .cardHook {
   font-family: var(--font-jakarta);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.35;
   color: #1C1C1A;
@@ -209,7 +209,7 @@
 
 .cardTeaser {
   font-family: var(--font-jakarta);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
   color: rgba(28, 28, 26, 0.5);
   margin-top: 6px;
@@ -228,7 +228,7 @@
   align-items: center;
   gap: 4px;
   font-family: var(--font-jakarta);
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
