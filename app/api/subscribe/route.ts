@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   // 1. Rate limit check
   const ip =
     req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    (req as any).ip ||
+    req.headers.get('x-real-ip')?.trim() ||
     null
 
   if (ip !== null && !checkRateLimit(ip)) {
