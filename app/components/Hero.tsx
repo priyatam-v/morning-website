@@ -82,14 +82,14 @@ function CardFace({
         <div className={styles.cardActions}>
           <div className={styles.cardActionHelpful}>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-              <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" fill="#2D5A2A" fillOpacity="0.15" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3v11z" fill="#2D5A2A" fillOpacity="0.15" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3v11z" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             Helpful
           </div>
           <div className={styles.cardActionSave}>
             <svg width="10" height="12" viewBox="0 0 24 24" fill="none">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z" stroke="rgba(28,28,26,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z" stroke="#1C1C1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             Save
           </div>
