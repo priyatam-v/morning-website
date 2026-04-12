@@ -157,7 +157,6 @@ export default function Worlds() {
               <p className={styles.worldCategory} style={{ color: world.color }}>
                 {world.category}
               </p>
-              <h3 className={styles.worldName}>{world.name}</h3>
               <p className={styles.worldDesc}>{world.lines.join(' ')}</p>
             </div>
           </div>
