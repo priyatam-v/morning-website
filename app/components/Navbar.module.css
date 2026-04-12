@@ -48,3 +48,22 @@
   background: #A8714F;
   transform: translateY(-1px);
 }
+
+@media (max-width: 640px) {
+  .nav {
+    padding: 0 1.25rem;
+  }
+
+  .inner {
+    height: 56px;
+  }
+
+  .logo {
+    height: 18px;
+  }
+
+  .cta {
+    font-size: 0.75rem;
+    padding: 0.45rem 1rem;
+  }
+}

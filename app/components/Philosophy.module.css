@@ -3,14 +3,16 @@
   align-items: center;
   justify-content: center;
   background: var(--bg);
+  min-height: 100vh;
   padding: 96px 2rem;
 }
 
 .inner {
-  max-width: 680px;
+  max-width: 640px;
   width: 100%;
 }
 
+/* ── Eyebrow ── */
 .eyebrow {
   font-family: var(--font-jakarta);
   font-size: clamp(22px, 2.5vw, 30px);
@@ -19,69 +21,117 @@
   color: var(--tertiary);
   margin-bottom: 40px;
   text-align: center;
-}
 
-.rows {
-  display: flex;
-  flex-direction: column;
-}
-
-.row {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(61, 61, 58, 0.08);
+  /* Hidden until observed */
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(20px);
+  filter: blur(8px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .row {
-    transition: none;
-  }
+.eyebrow.eyebrowVisible {
+  animation: eyebrowIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.row:last-child {
-  border-bottom: none;
+/* ── Row ── */
+.row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: baseline;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(61, 61, 58, 0.08);
 }
 
-.row.visible {
-  opacity: 1;
-  transform: translateY(0);
+.row:first-of-type {
+  border-top: 1px solid rgba(61, 61, 58, 0.08);
 }
 
 .num {
   font-family: var(--font-jakarta);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   color: rgba(61, 61, 58, 0.35);
-  letter-spacing: 0.1em;
-  flex-shrink: 0;
-  width: 18px;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 
 .text {
   font-family: var(--font-jakarta);
-  font-size: 16px;
-  line-height: 1.3;
-}
-
-.strong {
-  font-family: var(--font-jakarta);
-  font-weight: 600;
-  color: var(--tertiary);
-}
-
-.muted {
+  font-size: 18px;
   font-weight: 400;
+  line-height: 1.5;
   color: var(--tertiary);
+  letter-spacing: -0.01em;
 }
 
-.text em {
-  font-style: normal;
-  font-weight: 600;
-  color: var(--secondary);
+/* ── Animations (motion OK only) ── */
+@media (prefers-reduced-motion: no-preference) {
+  /* Eyebrow keyframe */
+  @keyframes eyebrowIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  /* Number slides in from left */
+  @keyframes numIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Text unmasks left → right like a curtain pulling away */
+  @keyframes textReveal {
+    from { opacity: 0.2; clip-path: inset(0 100% 0 0); }
+    to   { opacity: 1;   clip-path: inset(0 0%   0 0); }
+  }
+
+  /* Hide sub-elements when .animate is added by JS */
+  .row.animate .num  { opacity: 0; transform: translateX(-20px); }
+  .row.animate .text { opacity: 0; clip-path: inset(0 100% 0 0); }
+
+  /* Trigger animations when observer fires .visible */
+  .row.visible .num {
+    animation: numIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--row-delay, 0ms);
+  }
+
+  .row.visible .text {
+    animation: textReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--row-delay, 0ms) + 160ms);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 72px 1.5rem;
+  }
+
+  .eyebrow {
+    font-size: clamp(20px, 6vw, 26px);
+    margin-bottom: 28px;
+  }
+
+  .row {
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+}
+
+/* Reduced motion: content always visible, no hiding */
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow { opacity: 1; transform: none; filter: none; }
+  .row.animate .num  { opacity: 1; transform: none; }
+  .row.animate .text { opacity: 1; clip-path: none; }
 }

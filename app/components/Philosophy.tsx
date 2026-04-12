@@ -1,51 +1,73 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import type { ReactNode } from 'react'
 import styles from './Philosophy.module.css'
 
-const LINES: { num: string; text: ReactNode; strong: boolean }[] = [
-  { num: '01', text: <>Attention is <em>finite.</em> Treat it that way.</>, strong: true },
-  { num: '02', text: 'No streaks. No guilt. No algorithm.', strong: false },
-  { num: '03', text: <>Five ideas. Done. <em>Every morning.</em></>, strong: true },
-  { num: '04', text: 'Knowledge compounds. Slowly. Reliably.', strong: false },
-  { num: '05', text: <>The way the best things <em>always have.</em></>, strong: true },
+const LINES = [
+  { num: '01', text: 'Attention is finite. Treat it that way.' },
+  { num: '02', text: 'No streaks. No guilt. No algorithm.' },
+  { num: '03', text: 'Knowledge compounds. Slowly. Reliably.' },
 ]
 
 export default function Philosophy() {
+  const eyebrowRef = useRef<HTMLParagraphElement>(null)
   const rowRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    // --- Eyebrow ---
+    const eyebrowEl = eyebrowRef.current
+    let eyebrowObserver: IntersectionObserver | null = null
+    if (eyebrowEl) {
+      eyebrowObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            eyebrowEl.classList.add(styles.eyebrowVisible)
+            eyebrowObserver!.disconnect()
+          }
+        },
+        { threshold: 0.5 }
+      )
+      eyebrowObserver.observe(eyebrowEl)
+    }
+
+    // --- Rows ---
+    const els = rowRefs.current.filter(Boolean) as HTMLDivElement[]
+    // Add .animate so CSS hides sub-elements ready for animation
+    els.forEach(el => el.classList.add(styles.animate))
+
+    const rowObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add(styles.visible)
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible)
+            rowObserver.unobserve(entry.target)
+          }
         })
       },
       { threshold: 0.2 }
     )
-    rowRefs.current.forEach(el => { if (el) observer.observe(el) })
-    return () => observer.disconnect()
+    els.forEach(el => rowObserver.observe(el))
+
+    return () => {
+      eyebrowObserver?.disconnect()
+      rowObserver.disconnect()
+    }
   }, [])
 
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.eyebrow}>Our philosophy</p>
-        <div className={styles.rows}>
-          {LINES.map((line, i) => (
-            <div
-              key={line.num}
-              ref={el => { rowRefs.current[i] = el }}
-              className={styles.row}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <span className={styles.num}>{line.num}</span>
-              <span className={`${styles.text} ${line.strong ? styles.strong : styles.muted}`}>
-                {line.text}
-              </span>
-            </div>
-          ))}
-        </div>
+        <p ref={eyebrowRef} className={styles.eyebrow}>Our philosophy</p>
+        {LINES.map((line, i) => (
+          <div
+            key={line.num}
+            ref={el => { rowRefs.current[i] = el }}
+            className={styles.row}
+            style={{ '--row-delay': `${i * 120}ms` } as React.CSSProperties}
+          >
+            <span className={styles.num}>{line.num}</span>
+            <span className={styles.text}>{line.text}</span>
+          </div>
+        ))}
       </div>
     </section>
   )

@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   height: 100vh;
+  height: 100dvh;
   z-index: 1;
   display: grid;
   grid-template-columns: 55fr 45fr;
@@ -39,7 +40,7 @@
 
 .subline {
   font-family: var(--font-jakarta);
-  font-size: clamp(14px, 1.1vw, 16px);
+  font-size: 15px;
   line-height: 1.65;
   color: var(--tertiary);
   margin-top: 20px;
@@ -179,17 +180,78 @@
     to   { transform: translateY(100%); opacity: 0; }
   }
 
-  .entering-next {
-    animation: slideInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-  .exiting-next {
-    animation: slideOutUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-  .entering-prev {
-    animation: slideInDown 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-  .exiting-prev {
-    animation: slideOutDown 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
+  .entering-next  { animation: slideInUp    400ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .exiting-next   { animation: slideOutUp   400ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .entering-prev  { animation: slideInDown  400ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .exiting-prev   { animation: slideOutDown 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 }
 
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 72px 6vw 20px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .left {
+    align-items: center;
+    text-align: center;
+    order: 1;
+  }
+
+  .headline {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+
+  .subline {
+    font-size: 14px;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .right {
+    order: 2;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .phone {
+    width: 172px;
+    height: 372px;
+    border-radius: 28px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.08),
+      0 16px 40px rgba(0,0,0,0.3),
+      0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .island {
+    width: 56px;
+    height: 16px;
+    top: 8px;
+    border-radius: 8px;
+  }
+
+  .screen {
+    inset: 5px;
+    border-radius: 24px;
+  }
+
+  .card {
+    padding: 32px 14px 14px;
+    gap: 8px;
+  }
+
+  .cardHook {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .cardTeaser {
+    font-size: 10px;
+  }
+}

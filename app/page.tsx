@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Contrast from './components/Contrast'
 import Philosophy from './components/Philosophy'
 import Worlds from './components/Worlds'
 import Waitlist from './components/Waitlist'
@@ -22,12 +21,13 @@ export default function Home() {
         <div style={{ height: '100vh', background: 'transparent' }} />
 
         <main>
-          <Contrast />
           <Philosophy />
           <Worlds />
-          <Waitlist />
+          <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <Waitlist />
+            <Footer />
+          </div>
         </main>
-        <Footer />
       </div>
     </>
   )

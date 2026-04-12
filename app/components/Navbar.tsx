@@ -15,7 +15,7 @@ export default function Navbar() {
           className={styles.logo}
         />
         <button className={styles.cta} onClick={scrollToWaitlist}>
-          Join Waitlist
+          Get Early Access
         </button>
       </div>
     </nav>

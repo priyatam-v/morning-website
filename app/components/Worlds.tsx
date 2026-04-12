@@ -5,11 +5,11 @@ import styles from './Worlds.module.css'
 const WORLDS = [
   {
     id: 'body',
-    name: 'The Body',
+    name: 'Your body.',
     category: 'Health & Wellness',
     color: '#1D9E75',
     bg: '#F0FAF6',
-    lines: ['Sleep, stress, nutrition, longevity.', 'Science that changes how you treat yourself.'],
+    lines: ['The science of how you sleep, age, eat, and recover —', 'stripped of hype and actually explained.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="80" r="45" fill={color} opacity="0.12"/>
@@ -25,11 +25,11 @@ const WORLDS = [
   },
   {
     id: 'game',
-    name: 'The Game',
+    name: 'Your money.',
     category: 'Personal Finance & Investing',
     color: '#BA7517',
     bg: '#FDF6EC',
-    lines: ['How money actually moves.', 'And why most of what you were taught about it is wrong.'],
+    lines: ['Not tips. Not takes. The structures behind how wealth moves,', 'and why most people were never taught them.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="30" y="120" width="24" height="50" rx="4" fill={color} opacity="0.2"/>
@@ -43,11 +43,11 @@ const WORLDS = [
   },
   {
     id: 'world',
-    name: 'The World',
+    name: 'The world.',
     category: 'World',
     color: '#185FA5',
     bg: '#EEF5FD',
-    lines: ['Geopolitics, history, science, society.', 'The forces shaping the world you wake up in.'],
+    lines: ['The forces — political, historical, social — that explain why things', 'are the way they are. Context, not noise.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line x1="28" y1="28" x2="14" y2="17" stroke={color} strokeWidth="1" strokeOpacity="0.2"/>
@@ -67,11 +67,11 @@ const WORLDS = [
   },
   {
     id: 'shift',
-    name: 'The Shift',
+    name: 'What\'s shifting.',
     category: 'Technology & AI',
     color: '#534AB7',
     bg: '#F4F3FF',
-    lines: ['The world is being rewritten.', 'Understand it before it surprises you.'],
+    lines: ['Technology is rewriting entire industries in real time.', 'Morning helps you read the room before the room changes.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="55" stroke={color} strokeWidth="1.5" opacity="0.15" fill="none"/>
@@ -88,11 +88,11 @@ const WORLDS = [
   },
   {
     id: 'mind',
-    name: 'The Mind',
+    name: 'How you think.',
     category: 'Psychology & Mental Models',
     color: '#993C1D',
     bg: '#FDF3F0',
-    lines: ['Why you decide what you decide.', 'And how to get better at both.'],
+    lines: ['The mental models and psychological patterns behind', 'how you decide, adapt, and grow. This one compounds.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M100 155 C65 155 40 135 40 105 C40 80 55 68 70 65 C70 50 80 35 100 35 C120 35 130 50 130 65 C145 68 160 80 160 105 C160 135 135 155 100 155Z" fill={color} opacity="0.1" stroke={color} strokeWidth="1.5" strokeOpacity="0.2"/>
@@ -132,7 +132,7 @@ export default function Worlds() {
   return (
     <section className={styles.section}>
       <div className={styles.header} ref={ref}>
-        <p className={styles.eyebrow}>What we cover</p>
+        <p className={styles.eyebrow}>The things that quietly shape everything.</p>
       </div>
 
       <div className={styles.grid}>

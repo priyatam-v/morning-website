@@ -176,11 +176,10 @@ export default function Hero() {
     <section className={styles.hero}>
       <div className={styles.left}>
         <div ref={headlineRef} className={styles.headline}>
-          Something worth knowing.<br />
-          <em>Every morning.</em>
+          Your mind deserves<br />a better morning.
         </div>
         <p className={styles.subline}>
-          Five ideas across health, money, world, tech, and psychology — delivered before 8am. Then stop.
+          Morning is a daily brief for people who want to understand the world — not just scroll through it.
         </p>
       </div>
 

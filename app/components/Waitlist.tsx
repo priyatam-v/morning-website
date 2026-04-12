@@ -32,8 +32,8 @@ export default function Waitlist() {
       <div className={styles.waitlistContent}>
         <div className={styles.inner} ref={ref}>
 
-          <h2 className={styles.heading}>Morning is almost ready.</h2>
-          <p className={styles.body}>Leave your email. We'll let you know.</p>
+          <h2 className={styles.heading}>We're almost ready.</h2>
+          <p className={styles.body}>Morning is in its final stretch. If you'd like to be among the first to read it, leave your email below.</p>
 
           <div className={styles.formWrap}>
             {!submitted ? (
@@ -51,13 +51,13 @@ export default function Waitlist() {
                   required
                 />
                 <button type="submit" className={styles.btn} disabled={loading}>
-                  {loading ? 'Joining...' : 'Join the Waitlist'}
+                  {loading ? 'Joining...' : 'Get Early Access'}
                 </button>
               </form>
             ) : (
               <div className={styles.thanks}>
                 <span className={styles.thanksDot} />
-                We'll reach out when Morning is ready.
+                You're in. We'll reach out when it's time.
               </div>
             )}
           </div>

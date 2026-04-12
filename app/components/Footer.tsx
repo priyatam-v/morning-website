@@ -10,7 +10,7 @@ export default function Footer() {
             alt="Morning"
             className={styles.logo}
           />
-          <p className={styles.tagline}>Learn something real today.</p>
+          <p className={styles.tagline}>Know more. Scroll less.</p>
         </div>
 
         <div className={styles.right}>
@@ -23,7 +23,7 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <p className={styles.copy}>
-          © {new Date().getFullYear()} Morning. Built with curiosity.
+          © {new Date().getFullYear()} Morning
         </p>
         <p className={styles.bottomText}>
           No streaks. No guilt. No algorithm.

@@ -1,37 +1,33 @@
 import styles from './Contrast.module.css'
 
-const ROWS = [
+const PAIRS = [
   {
-    before: 'You meant to stop. You didn\'t.',
-    after: <>You know exactly <em>when you're done.</em></>,
+    before: 'You opened your phone. An hour passed.',
+    after:  'You read one thing. You closed it.',
   },
   {
-    before: 'You saw a lot. You kept none of it.',
-    after: <>Five things. <em>Actually yours.</em></>,
+    before: 'You were informed. You weren\'t wiser.',
+    after:  'You understood why it happened, not just that it did.',
   },
   {
-    before: 'Something happened. You half-understood it.',
-    after: <>Something happened. <em>Now you understand why.</em></>,
+    before: 'You consumed a lot. You retained almost nothing.',
+    after:  'A few things. Properly understood. Still with you.',
   },
 ]
 
 export default function Contrast() {
   return (
     <section className={styles.section}>
-      <p className={styles.eyebrow}>Sound familiar?</p>
-      <div className={styles.card}>
-        <div className={styles.labelRow}>
-          <span className={styles.labelBefore}>Most mornings</span>
-          <span className={styles.arrowSpacer} />
-          <span className={styles.labelAfter}>With Morning</span>
+      <div className={styles.inner}>
+        <p className={styles.eyebrow}>Sound familiar?</p>
+        <div className={styles.pairs}>
+          {PAIRS.map((pair, i) => (
+            <div key={i} className={styles.pair}>
+              <p className={styles.before}>{pair.before}</p>
+              <p className={styles.after}>{pair.after}</p>
+            </div>
+          ))}
         </div>
-        {ROWS.map((row, i) => (
-          <div key={i} className={styles.row}>
-            <p className={styles.before}>{row.before}</p>
-            <p className={styles.arrow}>→</p>
-            <p className={styles.after}>{row.after}</p>
-          </div>
-        ))}
       </div>
     </section>
   )
