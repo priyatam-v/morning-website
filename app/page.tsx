@@ -17,9 +17,9 @@ export default function Home() {
       {/* Everything here is z-index:2 and scrolls on top of the fixed hero.
           The spacer creates the scroll distance that drives the card animations. */}
       <div style={{ position: 'relative', zIndex: 2 }}>
-        {/* spacer: keeps hero fully visible while cards animate (2×100vh),
-            cards change at 40vh intervals so 3 cards = 80vh, rest is buffer */}
-        <div style={{ height: '200vh', background: 'transparent' }} />
+        {/* spacer: keeps hero fully visible during card cycling.
+            scrollTo(innerHeight) from the last card lands exactly here. */}
+        <div style={{ height: '100vh', background: 'transparent' }} />
 
         <main>
           <Contrast />

@@ -27,6 +27,10 @@ const CARDS = [
 ]
 
 const ANIMATION_MS = 400
+// How long to ignore wheel events after a card advance (absorbs trackpad inertia)
+const GESTURE_COOLDOWN_MS = 900
+// Minimum accumulated deltaY before a card advance fires
+const DELTA_THRESHOLD = 30
 
 export default function Hero() {
   const [current, setCurrent] = useState(0)
@@ -34,8 +38,12 @@ export default function Hero() {
   const [animDir, setAnimDir] = useState<'next' | 'prev' | null>(null)
   const currentRef = useRef(0)
   const animTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const cooldownRef = useRef(false)
+  const deltaAccRef = useRef(0)
+  const touchStartYRef = useRef(0)
   const headlineRef = useRef<HTMLDivElement>(null)
 
+  // Headline intro fade-in
   useEffect(() => {
     const el = headlineRef.current
     if (!el) return
@@ -48,10 +56,9 @@ export default function Hero() {
     }, 200)
   }, [])
 
-  const goTo = useCallback((newIndex: number) => {
+  const goTo = useCallback((newIndex: number, dir: 'next' | 'prev') => {
     const oldIndex = currentRef.current
     if (newIndex === oldIndex) return
-    const dir = newIndex > oldIndex ? 'next' : 'prev'
     setPrev(oldIndex)
     setAnimDir(dir)
     setCurrent(newIndex)
@@ -65,15 +72,101 @@ export default function Hero() {
 
   useEffect(() => () => { if (animTimerRef.current) clearTimeout(animTimerRef.current) }, [])
 
-  // Drive cards from scroll — each card triggers after 40% of viewport height scrolled
   useEffect(() => {
-    const onScroll = () => {
-      const step = window.innerHeight * 0.4  // 40vh per card
-      const idx = Math.min(Math.floor(window.scrollY / step), CARDS.length - 1)
-      goTo(idx)
+    const lock = () => {
+      cooldownRef.current = true
+      deltaAccRef.current = 0
+      setTimeout(() => {
+        cooldownRef.current = false
+        deltaAccRef.current = 0
+      }, GESTURE_COOLDOWN_MS)
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+
+    const handleDown = () => {
+      lock()
+      const idx = currentRef.current
+      if (idx < CARDS.length - 1) {
+        goTo(idx + 1, 'next')
+      } else {
+        // Last card — kick the page past the hero smoothly
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+      }
+    }
+
+    const handleUp = (): boolean => {
+      const idx = currentRef.current
+      if (idx > 0) {
+        lock()
+        goTo(idx - 1, 'prev')
+        return true
+      }
+      return false
+    }
+
+    const onWheel = (e: WheelEvent) => {
+      if (window.scrollY > 50) return
+      e.preventDefault()
+
+      // During cooldown, swallow all events (absorbs trackpad inertia tail)
+      if (cooldownRef.current) return
+
+      // Normalize across deltaMode: 0=pixels, 1=lines, 2=pages
+      let delta = e.deltaY
+      if (e.deltaMode === 1) delta *= 16
+      if (e.deltaMode === 2) delta *= window.innerHeight
+
+      deltaAccRef.current += delta
+
+      if (deltaAccRef.current >= DELTA_THRESHOLD) {
+        handleDown()
+      } else if (deltaAccRef.current <= -DELTA_THRESHOLD) {
+        handleUp()
+      }
+    }
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartYRef.current = e.touches[0].clientY
+    }
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (window.scrollY > 50) return
+      if (cooldownRef.current) return
+      const delta = touchStartYRef.current - e.changedTouches[0].clientY
+      if (Math.abs(delta) < 40) return // too small to be intentional
+
+      if (delta > 0) {
+        e.preventDefault()
+        handleDown()
+      } else {
+        const consumed = handleUp()
+        if (consumed) e.preventDefault()
+      }
+    }
+
+    // Arrow key support as a bonus
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (window.scrollY > 50) return
+      if (cooldownRef.current) return
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        handleDown()
+      } else if (e.key === 'ArrowUp') {
+        const consumed = handleUp()
+        if (consumed) e.preventDefault()
+      }
+    }
+
+    window.addEventListener('wheel', onWheel, { passive: false })
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    window.addEventListener('touchend', onTouchEnd, { passive: false })
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchend', onTouchEnd)
+      window.removeEventListener('keydown', onKeyDown)
+    }
   }, [goTo])
 
   const currentCard = CARDS[current]
@@ -86,6 +179,9 @@ export default function Hero() {
           Something worth knowing.<br />
           <em>Every morning.</em>
         </div>
+        <p className={styles.subline}>
+          Five ideas across health, money, world, tech, and psychology — delivered before 8am. Then stop.
+        </p>
       </div>
 
       <div className={styles.right}>
@@ -115,6 +211,16 @@ export default function Hero() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Card position dots */}
+        <div className={styles.dots} aria-hidden="true">
+          {CARDS.map((_, i) => (
+            <span
+              key={i}
+              className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
+            />
+          ))}
         </div>
       </div>
     </section>

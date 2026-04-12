@@ -15,7 +15,7 @@ export default function Footer() {
 
         <div className={styles.right}>
           <div className={styles.links}>
-            <a href="mailto:hello@getmorning.co" className={styles.link}>Contact us hello@getmorning.co</a>
+            <a href="mailto:hello@getmorning.co" className={styles.link}>hello@getmorning.co</a>
             <a href="https://instagram.com/getmorning.co" className={styles.link}>Instagram</a>
           </div>
         </div>

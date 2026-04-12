@@ -132,7 +132,7 @@ export default function Worlds() {
   return (
     <section className={styles.section}>
       <div className={styles.header} ref={ref}>
-        <p className={styles.heading}>What Morning covers</p>
+        <p className={styles.eyebrow}>What we cover</p>
       </div>
 
       <div className={styles.grid}>

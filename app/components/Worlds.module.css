@@ -8,7 +8,7 @@
 
 .header {
   max-width: 1100px;
-  margin: 0 auto 44px;
+  margin: 0 auto 56px;
   text-align: left;
   opacity: 0;
   transform: translateY(24px);
@@ -20,12 +20,22 @@
   transform: translateY(0);
 }
 
-.heading {
+.eyebrow {
   font-family: var(--font-jakarta);
-  font-size: 15px;
+  font-size: clamp(22px, 2.5vw, 30px);
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: rgba(61, 61, 58, 0.75);
+  color: var(--tertiary);
+  margin-bottom: 12px;
+}
+
+.heading {
+  font-family: var(--font-jakarta);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--tertiary);
 }
 
 /* ─── Grid ─── */
@@ -109,6 +119,13 @@
   font-size: 13px;
   line-height: 1.6;
   color: rgba(61, 61, 58, 0.58);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .worldCard {
+    transition: none;
+  }
 }
 
 @media (max-width: 900px) {

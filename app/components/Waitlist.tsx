@@ -38,7 +38,11 @@ export default function Waitlist() {
           <div className={styles.formWrap}>
             {!submitted ? (
               <form onSubmit={handleSubmit} className={styles.form}>
+                <label htmlFor="waitlist-email" className={styles.srOnly}>
+                  Email address
+                </label>
                 <input
+                  id="waitlist-email"
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
