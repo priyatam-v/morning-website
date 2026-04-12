@@ -41,6 +41,66 @@ function WorldVisual() {
   )
 }
 
+function CardFace({
+  card,
+  activeIndex,
+  animClass,
+}: {
+  card: typeof CARDS[number]
+  activeIndex: number
+  animClass: string
+}) {
+  const Visual = card.Visual
+  return (
+    <div className={`${styles.card} ${animClass}`}>
+      {/* Nav */}
+      <div className={styles.cardNav}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 12L6 8L10 4" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <div className={styles.cardNavDots}>
+          {CARDS.map((_, i) => (
+            <span
+              key={i}
+              className={`${styles.cardNavDot} ${i === activeIndex ? styles.cardNavDotActive : ''}`}
+            />
+          ))}
+        </div>
+        <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+          <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+      {/* Visual */}
+      <div className={styles.cardVisual}>
+        <Visual />
+        <div className={styles.learnMoreWrap}>
+          <span className={styles.learnMore}>Learn More</span>
+        </div>
+      </div>
+      {/* Content */}
+      <div className={styles.cardContent}>
+        <span className={styles.cardPill}>{card.type} · {card.world}</span>
+        <p className={styles.cardHook}>{card.hook}</p>
+        <p className={styles.cardTeaser}>{card.teaser}</p>
+        <div className={styles.cardActions}>
+          <div className={styles.cardActionBtn}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+              <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-4V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Helpful
+          </div>
+          <div className={styles.cardActionBtn}>
+            <svg width="12" height="14" viewBox="0 0 14 16" fill="none">
+              <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Save
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const CARDS = [
   {
     world: 'Health',
@@ -228,103 +288,17 @@ export default function Hero() {
           <div className={styles.screen}>
             <div className={styles.cardSlot}>
               {prevCard && (
-                <div
-                  className={`${styles.card} ${animDir === 'next' ? styles['exiting-next'] : styles['exiting-prev']}`}
-                >
-                  {/* Nav */}
-                  <div className={styles.cardNav}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M10 12L6 8L10 4" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <div className={styles.cardNavDots}>
-                      {CARDS.map((_, i) => (
-                        <span
-                          key={i}
-                          className={`${styles.cardNavDot} ${i === prev ? styles.cardNavDotActive : ''}`}
-                        />
-                      ))}
-                    </div>
-                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
-                      <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                  {/* Visual */}
-                  <div className={styles.cardVisual}>
-                    <prevCard.Visual />
-                    <div className={styles.learnMoreWrap}>
-                      <span className={styles.learnMore}>Learn More</span>
-                    </div>
-                  </div>
-                  {/* Content */}
-                  <div className={styles.cardContent}>
-                    <span className={styles.cardPill}>{prevCard.type} · {prevCard.world}</span>
-                    <p className={styles.cardHook}>{prevCard.hook}</p>
-                    <p className={styles.cardTeaser}>{prevCard.teaser}</p>
-                    <div className={styles.cardActions}>
-                      <div className={styles.cardActionBtn}>
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-                          <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-4V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        Helpful
-                      </div>
-                      <div className={styles.cardActionBtn}>
-                        <svg width="10" height="12" viewBox="0 0 14 16" fill="none">
-                          <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        Save
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <CardFace
+                  card={prevCard}
+                  activeIndex={prev as number}
+                  animClass={animDir === 'next' ? styles['exiting-next'] : styles['exiting-prev']}
+                />
               )}
-              <div
-                className={`${styles.card} ${animDir ? (animDir === 'next' ? styles['entering-next'] : styles['entering-prev']) : ''}`}
-              >
-                {/* Nav */}
-                <div className={styles.cardNav}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M10 12L6 8L10 4" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div className={styles.cardNavDots}>
-                    {CARDS.map((_, i) => (
-                      <span
-                        key={i}
-                        className={`${styles.cardNavDot} ${i === current ? styles.cardNavDotActive : ''}`}
-                      />
-                    ))}
-                  </div>
-                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
-                    <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                {/* Visual */}
-                <div className={styles.cardVisual}>
-                  <currentCard.Visual />
-                  <div className={styles.learnMoreWrap}>
-                    <span className={styles.learnMore}>Learn More</span>
-                  </div>
-                </div>
-                {/* Content */}
-                <div className={styles.cardContent}>
-                  <span className={styles.cardPill}>{currentCard.type} · {currentCard.world}</span>
-                  <p className={styles.cardHook}>{currentCard.hook}</p>
-                  <p className={styles.cardTeaser}>{currentCard.teaser}</p>
-                  <div className={styles.cardActions}>
-                    <div className={styles.cardActionBtn}>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-                        <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-4V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      Helpful
-                    </div>
-                    <div className={styles.cardActionBtn}>
-                      <svg width="10" height="12" viewBox="0 0 14 16" fill="none">
-                        <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      Save
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CardFace
+                card={currentCard}
+                activeIndex={current}
+                animClass={animDir ? (animDir === 'next' ? styles['entering-next'] : styles['entering-prev']) : ''}
+              />
             </div>
           </div>
         </div>
