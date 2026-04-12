@@ -195,7 +195,6 @@
 .cardActions {
   display: flex;
   align-items: center;
-  gap: 16px;
   margin-top: auto;
   padding-top: 10px;
   border-top: 1px solid rgba(28, 28, 26, 0.07);
@@ -223,6 +222,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(28, 28, 26, 0.45);
+  margin-left: auto;
 }
 
 /* ── Slide animations ── */
