@@ -7,6 +7,7 @@ export default function Waitlist() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,9 +22,24 @@ export default function Waitlist() {
     e.preventDefault()
     if (!email) return
     setLoading(true)
-    await new Promise(r => setTimeout(r, 900))
-    setLoading(false)
-    setSubmitted(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setError(data.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -37,23 +53,28 @@ export default function Waitlist() {
 
           <div className={styles.formWrap}>
             {!submitted ? (
-              <form onSubmit={handleSubmit} className={styles.form}>
-                <label htmlFor="waitlist-email" className={styles.srOnly}>
-                  Email address
-                </label>
-                <input
-                  id="waitlist-email"
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className={styles.input}
-                  required
-                />
-                <button type="submit" className={styles.btn} disabled={loading}>
-                  {loading ? 'Joining...' : 'Get Early Access'}
-                </button>
-              </form>
+              <>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <label htmlFor="waitlist-email" className={styles.srOnly}>
+                    Email address
+                  </label>
+                  <input
+                    id="waitlist-email"
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className={styles.input}
+                    required
+                  />
+                  <button type="submit" className={styles.btn} disabled={loading}>
+                    {loading ? 'Joining...' : 'Get Early Access'}
+                  </button>
+                </form>
+                {error && (
+                  <p className={styles.error}>{error}</p>
+                )}
+              </>
             ) : (
               <div className={styles.thanks}>
                 <span className={styles.thanksDot} />
