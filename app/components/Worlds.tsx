@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import posthog from 'posthog-js'
 import styles from './Worlds.module.css'
 
 const WORLDS = [
@@ -111,7 +112,13 @@ export default function Worlds() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) ref.current?.classList.add(styles.visible) },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          ref.current?.classList.add(styles.visible)
+          posthog.capture('section_viewed', { section: 'worlds' })
+          observer.disconnect()
+        }
+      },
       { threshold: 0.2 }
     )
     if (ref.current) observer.observe(ref.current)
