@@ -14,17 +14,17 @@ export default function Footer() {
         </div>
 
         <div className={styles.right}>
-          <p className={styles.copy}>
-            © {new Date().getFullYear()} Morning. Built with care.
-          </p>
           <div className={styles.links}>
-            <a href="mailto:hello@getmorning.co" className={styles.link}>hello@getmorning.co</a>
-            <a href="https://instagram.com/getmorning.co" className={styles.link}>@getmorning.co on Instagram</a>
+            <a href="mailto:hello@getmorning.co" className={styles.link}>Contact us hello@getmorning.co</a>
+            <a href="https://instagram.com/getmorning.co" className={styles.link}>Instagram</a>
           </div>
         </div>
       </div>
 
       <div className={styles.bottom}>
+        <p className={styles.copy}>
+          © {new Date().getFullYear()} Morning. Built with curiosity.
+        </p>
         <p className={styles.bottomText}>
           No streaks. No guilt. No algorithm.
         </p>

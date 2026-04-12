@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import styles from './Waitlist.module.css'
-import Footer from './Footer'
 
 export default function Waitlist() {
   const ref = useRef<HTMLDivElement>(null)
@@ -61,7 +60,6 @@ export default function Waitlist() {
 
         </div>
       </div>
-      <Footer />
     </section>
   )
 }

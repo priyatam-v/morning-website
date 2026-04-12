@@ -52,6 +52,7 @@
   font-size: 0.8125rem;
   color: var(--bg);
   opacity: 0.3;
+  text-align: center;
 }
 
 .links {
@@ -79,6 +80,9 @@
   margin: 0 auto;
   padding: 20px 0 28px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .bottomText {

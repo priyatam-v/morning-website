@@ -1,10 +1,9 @@
 .section {
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg);
-  padding: 0 2rem;
+  padding: 96px 2rem;
 }
 
 .inner {
@@ -14,12 +13,12 @@
 
 .eyebrow {
   font-family: var(--font-jakarta);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(61, 61, 58, 0.6);
+  letter-spacing: -0.01em;
+  color: rgba(61, 61, 58, 0.75);
   margin-bottom: 40px;
+  text-align: center;
 }
 
 .rows {

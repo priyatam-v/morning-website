@@ -24,35 +24,16 @@ const CARDS = [
     hook: 'The country quietly buying up more land than anyone realises',
     teaser: 'A map of global land acquisitions that rewrites the geopolitical story.',
   },
-  {
-    world: 'Tech',
-    color: '#534AB7',
-    bg: '#EEEDFE',
-    hook: 'The AI nobody is talking about — and why it changes everything',
-    teaser: 'It\'s not ChatGPT. And it\'s already inside the tools you use every day.',
-  },
-  {
-    world: 'Psychology',
-    color: '#993C1D',
-    bg: '#FAECE7',
-    hook: 'The bias that makes you terrible at predicting your own happiness',
-    teaser: 'Why humans are systematically wrong about what will make them feel good.',
-  },
 ]
 
 const ANIMATION_MS = 400
-const AUTO_ADVANCE_MS = 4000
-
-type AnimState = 'idle' | 'next' | 'prev'
 
 export default function Hero() {
   const [current, setCurrent] = useState(0)
   const [prev, setPrev] = useState<number | null>(null)
-  const [animState, setAnimState] = useState<AnimState>('idle')
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [animDir, setAnimDir] = useState<'next' | 'prev' | null>(null)
+  const currentRef = useRef(0)
   const animTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const isAnimating = useRef(false)
-
   const headlineRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -67,41 +48,39 @@ export default function Hero() {
     }, 200)
   }, [])
 
-  const navigate = useCallback((direction: 'next' | 'prev') => {
-    if (isAnimating.current) return
-    isAnimating.current = true
-
-    if (timerRef.current) clearTimeout(timerRef.current)
-
-    setAnimState(direction)
-    setCurrent(c => {
-      setPrev(c)
-      if (direction === 'next') return (c + 1) % CARDS.length
-      return (c - 1 + CARDS.length) % CARDS.length
-    })
-
+  const goTo = useCallback((newIndex: number) => {
+    const oldIndex = currentRef.current
+    if (newIndex === oldIndex) return
+    const dir = newIndex > oldIndex ? 'next' : 'prev'
+    setPrev(oldIndex)
+    setAnimDir(dir)
+    setCurrent(newIndex)
+    currentRef.current = newIndex
     if (animTimerRef.current) clearTimeout(animTimerRef.current)
     animTimerRef.current = setTimeout(() => {
       setPrev(null)
-      setAnimState('idle')
-      isAnimating.current = false
+      setAnimDir(null)
     }, ANIMATION_MS)
   }, [])
 
   useEffect(() => () => { if (animTimerRef.current) clearTimeout(animTimerRef.current) }, [])
 
-  // Auto-advance
+  // Drive cards from scroll — each card triggers after 40% of viewport height scrolled
   useEffect(() => {
-    timerRef.current = setTimeout(() => navigate('next'), AUTO_ADVANCE_MS)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [current, navigate])
+    const onScroll = () => {
+      const step = window.innerHeight * 0.4  // 40vh per card
+      const idx = Math.min(Math.floor(window.scrollY / step), CARDS.length - 1)
+      goTo(idx)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [goTo])
 
   const currentCard = CARDS[current]
   const prevCard = prev !== null ? CARDS[prev] : null
 
   return (
     <section className={styles.hero}>
-      {/* Left: headline */}
       <div className={styles.left}>
         <div ref={headlineRef} className={styles.headline}>
           Something worth knowing.<br />
@@ -109,16 +88,14 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right: phone mockup */}
       <div className={styles.right}>
         <div className={styles.phone}>
           <div className={styles.island} />
           <div className={styles.screen}>
             <div className={styles.cardSlot}>
-              {/* Outgoing card */}
               {prevCard && (
                 <div
-                  className={`${styles.card} ${animState === 'next' ? styles['exiting-next'] : styles['exiting-prev']}`}
+                  className={`${styles.card} ${animDir === 'next' ? styles['exiting-next'] : styles['exiting-prev']}`}
                   style={{ background: prevCard.bg }}
                 >
                   <p className={styles.cardCategory} style={{ color: prevCard.color }}>{prevCard.world}</p>
@@ -127,9 +104,8 @@ export default function Hero() {
                   <div className={styles.cardAccent} style={{ background: prevCard.color, opacity: 0.15 }} />
                 </div>
               )}
-              {/* Incoming card */}
               <div
-                className={`${styles.card} ${animState !== 'idle' ? (animState === 'next' ? styles['entering-next'] : styles['entering-prev']) : ''}`}
+                className={`${styles.card} ${animDir ? (animDir === 'next' ? styles['entering-next'] : styles['entering-prev']) : ''}`}
                 style={{ background: currentCard.bg }}
               >
                 <p className={styles.cardCategory} style={{ color: currentCard.color }}>{currentCard.world}</p>
@@ -139,12 +115,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Controls */}
-        <div className={styles.controls}>
-          <button className={styles.ctaBtn} onClick={() => navigate('prev')}>Prev</button>
-          <button className={styles.ctaBtn} onClick={() => navigate('next')}>Next</button>
         </div>
       </div>
     </section>

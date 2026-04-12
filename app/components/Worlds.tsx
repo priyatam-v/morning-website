@@ -8,7 +8,7 @@ const WORLDS = [
     name: 'The Body',
     category: 'Health & Wellness',
     color: '#1D9E75',
-    bg: '#E1F5EE',
+    bg: '#F0FAF6',
     lines: ['Sleep, stress, nutrition, longevity.', 'Science that changes how you treat yourself.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@ const WORLDS = [
     name: 'The Game',
     category: 'Personal Finance & Investing',
     color: '#BA7517',
-    bg: '#FAEEDA',
+    bg: '#FDF6EC',
     lines: ['How money actually moves.', 'And why most of what you were taught about it is wrong.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +46,7 @@ const WORLDS = [
     name: 'The World',
     category: 'World',
     color: '#185FA5',
-    bg: '#E6F1FB',
+    bg: '#EEF5FD',
     lines: ['Geopolitics, history, science, society.', 'The forces shaping the world you wake up in.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@ const WORLDS = [
     name: 'The Shift',
     category: 'Technology & AI',
     color: '#534AB7',
-    bg: '#EEEDFE',
+    bg: '#F4F3FF',
     lines: ['The world is being rewritten.', 'Understand it before it surprises you.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@ const WORLDS = [
     name: 'The Mind',
     category: 'Psychology & Mental Models',
     color: '#993C1D',
-    bg: '#FAECE7',
+    bg: '#FDF3F0',
     lines: ['Why you decide what you decide.', 'And how to get better at both.'],
     illustration: (color: string) => (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">

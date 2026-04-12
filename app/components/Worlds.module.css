@@ -1,10 +1,9 @@
 .section {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 24px 2rem;
-  background: var(--bg);
+  padding: 96px 2rem;
+  background: var(--bg-card);
 }
 
 .header {
@@ -23,11 +22,10 @@
 
 .heading {
   font-family: var(--font-jakarta);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(61, 61, 58, 0.6);
+  letter-spacing: -0.01em;
+  color: rgba(61, 61, 58, 0.75);
 }
 
 /* ─── Grid ─── */
@@ -41,7 +39,7 @@
 
 /* ─── World Card ─── */
 .worldCard {
-  background: var(--bg-card);
+  background: var(--world-bg);
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(61,61,58,0.07);
@@ -71,7 +69,6 @@
 
 .worldIllustration {
   width: 100%;
-  background: var(--world-bg);
   display: flex;
   align-items: center;
   justify-content: center;
