@@ -30,6 +30,7 @@ export default function Waitlist() {
     if (!email) return
     setLoading(true)
     setError(null)
+    posthog.capture('waitlist_submitted')
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
@@ -37,6 +38,7 @@ export default function Waitlist() {
         body: JSON.stringify({ email }),
       })
       if (res.ok) {
+        posthog.capture('waitlist_success')
         setSubmitted(true)
       } else {
         let message = 'Something went wrong. Please try again.'
@@ -44,9 +46,11 @@ export default function Waitlist() {
           const data = await res.json()
           if (typeof data?.error === 'string') message = data.error
         } catch { /* ignore non-JSON error bodies */ }
+        posthog.capture('waitlist_error', { reason: message })
         setError(message)
       }
     } catch {
+      posthog.capture('waitlist_error', { reason: 'network_error' })
       setError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
