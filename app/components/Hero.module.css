@@ -197,19 +197,45 @@
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(28, 28, 26, 0.07);
+  gap: 6px;
 }
 
-.cardActionBtn {
+.cardActionHelpful {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   font-family: var(--font-jakarta);
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #2D5A2A;
+  background: rgba(45, 90, 42, 0.09);
+  border: 1px solid rgba(45, 90, 42, 0.18);
+  border-radius: 20px;
+  padding: 5px 10px;
+  flex: 1;
+  justify-content: center;
+}
+
+.cardActionSave {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-jakarta);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(28, 28, 26, 0.5);
+  background: rgba(28, 28, 26, 0.04);
+  border: 1px solid rgba(28, 28, 26, 0.1);
+  border-radius: 20px;
+  padding: 5px 10px;
+  flex: 1;
+  justify-content: center;
 }
 
 /* ── Slide animations ── */
@@ -316,9 +342,11 @@
     padding: 2px 6px;
   }
 
-  .cardActionBtn {
+  .cardActionHelpful,
+  .cardActionSave {
     font-size: 6px;
     gap: 3px;
+    padding: 4px 8px;
   }
 
   .learnMore {
