@@ -7,7 +7,7 @@ const WORLDS = [
   {
     id: 'body',
     name: 'Your body.',
-    category: 'Health & Wellness',
+    category: 'Health',
     color: '#1D9E75',
     bg: '#F0FAF6',
     lines: ['The science of how you sleep, age, eat, and recover —', 'stripped of hype and actually explained.'],
@@ -27,7 +27,7 @@ const WORLDS = [
   {
     id: 'game',
     name: 'Your money.',
-    category: 'Personal Finance & Investing',
+    category: 'Money',
     color: '#BA7517',
     bg: '#FDF6EC',
     lines: ['Not tips. Not takes. The structures behind how wealth moves,', 'and why most people were never taught them.'],
@@ -69,7 +69,7 @@ const WORLDS = [
   {
     id: 'shift',
     name: 'What\'s shifting.',
-    category: 'Technology & AI',
+    category: 'Technology',
     color: '#534AB7',
     bg: '#F4F3FF',
     lines: ['Technology is rewriting entire industries in real time.', 'Morning helps you read the room before the room changes.'],
@@ -90,7 +90,7 @@ const WORLDS = [
   {
     id: 'mind',
     name: 'How you think.',
-    category: 'Psychology & Mental Models',
+    category: 'Psychology',
     color: '#993C1D',
     bg: '#FDF3F0',
     lines: ['The mental models and psychological patterns behind', 'how you decide, adapt, and grow. This one compounds.'],

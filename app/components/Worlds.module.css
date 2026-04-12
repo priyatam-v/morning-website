@@ -93,9 +93,9 @@
 
 .worldCategory {
   font-family: var(--font-jakarta);
-  font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 6px;
 }
