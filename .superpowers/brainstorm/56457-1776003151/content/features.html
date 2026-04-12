@@ -1,0 +1,33 @@
+<h2>Which PostHog features do you want?</h2>
+<p class="subtitle">Select all that apply. Events + pageviews are always included.</p>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="session-recording" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Session Recording</h3>
+      <p>Watch real user sessions — see exactly how visitors scroll, click, and interact with the page. Requires explicit opt-in config.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="heatmaps" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Heatmaps</h3>
+      <p>Aggregate click and scroll maps across all visitors. Great for seeing which sections get attention.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="feature-flags" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Feature Flags</h3>
+      <p>A/B test copy, layouts, or CTAs on the landing page. Useful for optimizing conversion once you have traffic.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="none" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <h3>Events only</h3>
+      <p>Keep it lean — just pageviews, custom events, and funnel analytics. No extras.</p>
+    </div>
+  </div>
+</div>

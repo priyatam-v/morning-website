@@ -1,0 +1,95 @@
+<h2>Event Taxonomy</h2>
+<p class="subtitle">Every event that will be captured — automatic and custom</p>
+
+<div class="section">
+  <h3>Automatic (PostHog built-in)</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:0.9em">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:8px 12px;color:var(--text-secondary)">Event</th>
+        <th style="padding:8px 12px;color:var(--text-secondary)">When</th>
+        <th style="padding:8px 12px;color:var(--text-secondary)">Properties</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:10px 12px"><code>$pageview</code></td>
+        <td style="padding:10px 12px">On page load</td>
+        <td style="padding:10px 12px;color:var(--text-secondary)">URL, referrer, UTM params</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Section engagement</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:0.9em">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:8px 12px;color:var(--text-secondary)">Event</th>
+        <th style="padding:8px 12px;color:var(--text-secondary)">When</th>
+        <th style="padding:8px 12px;color:var(--text-secondary)">Properties</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:10px 12px"><code>section_viewed</code></td>
+        <td style="padding:10px 12px">Section enters viewport (30% threshold)</td>
+        <td style="padding:10px 12px;color:var(--text-secondary)"><code>{ section: 'philosophy' }</code></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:10px 12px"><code>section_viewed</code></td>
+        <td style="padding:10px 12px">Section enters viewport (30% threshold)</td>
+        <td style="padding:10px 12px;color:var(--text-secondary)"><code>{ section: 'worlds' }</code></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:10px 12px"><code>section_viewed</code></td>
+        <td style="padding:10px 12px">Section enters viewport (30% threshold)</td>
+        <td style="padding:10px 12px;color:var(--text-secondary)"><code>{ section: 'waitlist' }</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Waitlist funnel</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:0.9em">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:8px 12px;color:var(--text-secondary)">Event</th>
+        <th style="padding:8px 12px;color:var(--text-secondary)">When</th>
+        <th style="padding:8px 12px;color:var(--text-secondary)">Properties</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:10px 12px"><code>waitlist_submitted</code></td>
+        <td style="padding:10px 12px">User clicks "Get Early Access"</td>
+        <td style="padding:10px 12px;color:var(--text-secondary)">—</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:10px 12px"><code>waitlist_success</code></td>
+        <td style="padding:10px 12px">API returns 200</td>
+        <td style="padding:10px 12px;color:var(--text-secondary)">—</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px"><code>waitlist_error</code></td>
+        <td style="padding:10px 12px">API returns error</td>
+        <td style="padding:10px 12px;color:var(--text-secondary)"><code>{ reason: string }</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Funnel this unlocks in PostHog</h3>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-size:0.85em">$pageview</div>
+    <div style="color:var(--text-secondary)">→</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-size:0.85em">section_viewed: waitlist</div>
+    <div style="color:var(--text-secondary)">→</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-size:0.85em">waitlist_submitted</div>
+    <div style="color:var(--text-secondary)">→</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-size:0.85em">waitlist_success</div>
+  </div>
+</div>

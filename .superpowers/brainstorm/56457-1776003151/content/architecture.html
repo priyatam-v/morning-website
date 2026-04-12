@@ -1,0 +1,49 @@
+<h2>Architecture — PostHog Integration</h2>
+<p class="subtitle">Three new pieces; two existing components get events added</p>
+
+<div class="section">
+  <h3>New files</h3>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
+      <div class="label">New component</div>
+      <strong>app/components/PostHogProvider.tsx</strong>
+      <p style="margin:6px 0 0;color:var(--text-secondary);font-size:0.9em">Client component. Calls <code>posthog.init()</code> once on mount with cookieless config. Wraps children. Added to <strong>layout.tsx</strong>.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <h3>Modified files</h3>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
+      <div class="label">Modified</div>
+      <strong>app/layout.tsx</strong>
+      <p style="margin:6px 0 0;color:var(--text-secondary);font-size:0.9em">Wrap <code>{children}</code> with <code>&lt;PostHogProvider&gt;</code>. No other changes.</p>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
+      <div class="label">Modified — add events</div>
+      <strong>app/components/Waitlist.tsx</strong>
+      <p style="margin:6px 0 0;color:var(--text-secondary);font-size:0.9em">Fire <code>waitlist_submitted</code>, <code>waitlist_success</code>, and <code>waitlist_error</code> at the right moments in <code>handleSubmit</code>.</p>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
+      <div class="label">Modified — add events</div>
+      <strong>app/components/Philosophy.tsx &amp; Worlds.tsx</strong>
+      <p style="margin:6px 0 0;color:var(--text-secondary);font-size:0.9em">Add IntersectionObserver (same pattern as Waitlist) to fire <code>section_viewed</code> when each section enters the viewport.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <h3>PostHog init config</h3>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-family:monospace;font-size:0.85em;color:var(--text-secondary)">
+    persistence: <span style="color:#7ee787">'memory'</span>  &nbsp;// cookieless — no consent banner needed<br>
+    capture_pageview: <span style="color:#7ee787">true</span>   &nbsp;// automatic $pageview on load<br>
+    autocapture: <span style="color:#f85149">false</span>        &nbsp;// we define our own events, no noise
+  </div>
+</div>
