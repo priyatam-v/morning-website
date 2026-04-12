@@ -44,24 +44,24 @@ function WorldVisual() {
 const CARDS = [
   {
     world: 'Health',
-    color: '#1D9E75',
-    bg: '#E1F5EE',
+    type: 'Mental Model',
     hook: 'The 8-hour myth — why sleeping longer might actually be hurting you',
     teaser: 'New research on sleep quality vs. quantity is changing what experts recommend.',
+    Visual: HealthVisual,
   },
   {
     world: 'Money',
-    color: '#BA7517',
-    bg: '#FAEEDA',
+    type: 'Deep Dive',
     hook: 'Why your savings account is quietly making you poorer',
-    teaser: 'Inflation math that most banks don\'t want you to think about.',
+    teaser: "Inflation math that most banks don't want you to think about.",
+    Visual: MoneyVisual,
   },
   {
     world: 'World',
-    color: '#185FA5',
-    bg: '#E6F1FB',
+    type: 'Explainer',
     hook: 'The country quietly buying up more land than anyone realises',
     teaser: 'A map of global land acquisitions that rewrites the geopolitical story.',
+    Visual: WorldVisual,
   },
 ]
 
@@ -230,35 +230,103 @@ export default function Hero() {
               {prevCard && (
                 <div
                   className={`${styles.card} ${animDir === 'next' ? styles['exiting-next'] : styles['exiting-prev']}`}
-                  style={{ background: prevCard.bg }}
                 >
-                  <p className={styles.cardCategory} style={{ color: prevCard.color }}>{prevCard.world}</p>
-                  <p className={styles.cardHook}>{prevCard.hook}</p>
-                  <p className={styles.cardTeaser}>{prevCard.teaser}</p>
-                  <div className={styles.cardAccent} style={{ background: prevCard.color, opacity: 0.15 }} />
+                  {/* Nav */}
+                  <div className={styles.cardNav}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M10 12L6 8L10 4" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <div className={styles.cardNavDots}>
+                      {CARDS.map((_, i) => (
+                        <span
+                          key={i}
+                          className={`${styles.cardNavDot} ${i === prev ? styles.cardNavDotActive : ''}`}
+                        />
+                      ))}
+                    </div>
+                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+                      <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  {/* Visual */}
+                  <div className={styles.cardVisual}>
+                    <prevCard.Visual />
+                    <div className={styles.learnMoreWrap}>
+                      <span className={styles.learnMore}>Learn More</span>
+                    </div>
+                  </div>
+                  {/* Content */}
+                  <div className={styles.cardContent}>
+                    <span className={styles.cardPill}>{prevCard.type} · {prevCard.world}</span>
+                    <p className={styles.cardHook}>{prevCard.hook}</p>
+                    <p className={styles.cardTeaser}>{prevCard.teaser}</p>
+                    <div className={styles.cardActions}>
+                      <div className={styles.cardActionBtn}>
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                          <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-4V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        Helpful
+                      </div>
+                      <div className={styles.cardActionBtn}>
+                        <svg width="10" height="12" viewBox="0 0 14 16" fill="none">
+                          <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        Save
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
               <div
                 className={`${styles.card} ${animDir ? (animDir === 'next' ? styles['entering-next'] : styles['entering-prev']) : ''}`}
-                style={{ background: currentCard.bg }}
               >
-                <p className={styles.cardCategory} style={{ color: currentCard.color }}>{currentCard.world}</p>
-                <p className={styles.cardHook}>{currentCard.hook}</p>
-                <p className={styles.cardTeaser}>{currentCard.teaser}</p>
-                <div className={styles.cardAccent} style={{ background: currentCard.color, opacity: 0.15 }} />
+                {/* Nav */}
+                <div className={styles.cardNav}>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 12L6 8L10 4" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <div className={styles.cardNavDots}>
+                    {CARDS.map((_, i) => (
+                      <span
+                        key={i}
+                        className={`${styles.cardNavDot} ${i === current ? styles.cardNavDotActive : ''}`}
+                      />
+                    ))}
+                  </div>
+                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
+                    <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                {/* Visual */}
+                <div className={styles.cardVisual}>
+                  <currentCard.Visual />
+                  <div className={styles.learnMoreWrap}>
+                    <span className={styles.learnMore}>Learn More</span>
+                  </div>
+                </div>
+                {/* Content */}
+                <div className={styles.cardContent}>
+                  <span className={styles.cardPill}>{currentCard.type} · {currentCard.world}</span>
+                  <p className={styles.cardHook}>{currentCard.hook}</p>
+                  <p className={styles.cardTeaser}>{currentCard.teaser}</p>
+                  <div className={styles.cardActions}>
+                    <div className={styles.cardActionBtn}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3m7-4V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      Helpful
+                    </div>
+                    <div className={styles.cardActionBtn}>
+                      <svg width="10" height="12" viewBox="0 0 14 16" fill="none">
+                        <path d="M2 2h10v12l-5-3-5 3V2z" stroke="#2D5A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      Save
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Card position dots */}
-        <div className={styles.dots} aria-hidden="true">
-          {CARDS.map((_, i) => (
-            <span
-              key={i}
-              className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
-            />
-          ))}
         </div>
       </div>
     </section>
