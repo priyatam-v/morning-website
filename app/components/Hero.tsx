@@ -1,17 +1,18 @@
 'use client'
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, useId } from 'react'
 import styles from './Hero.module.css'
 
 function HealthVisual() {
+  const glowId = useId()
   return (
     <svg width="100%" height="100%" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="hGlow" cx="50%" cy="50%" r="50%">
+        <radialGradient id={glowId} cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#F5C4A8" stopOpacity="0.5" />
           <stop offset="100%" stopColor="#FAF8F4" stopOpacity="0" />
         </radialGradient>
       </defs>
-      <circle cx="100" cy="95" r="80" fill="url(#hGlow)" />
+      <circle cx="100" cy="95" r="80" fill={`url(#${glowId})`} />
       <circle cx="95" cy="85" r="55" fill="#F5C4A8" opacity="0.55" />
       <circle cx="125" cy="115" r="32" fill="#F0A888" opacity="0.4" />
     </svg>
