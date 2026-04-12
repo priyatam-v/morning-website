@@ -105,22 +105,22 @@ const CARDS = [
   {
     world: 'Health',
     type: 'Mental Model',
-    hook: 'The 8-hour myth — why sleeping longer might actually be hurting you',
-    teaser: 'New research on sleep quality vs. quantity is changing what experts recommend.',
+    hook: "You don't lose fat. You breathe it out.",
+    teaser: 'When fat is metabolised, 84% leaves your body as CO₂ through your lungs. Your lungs — not your sweat — are the primary fat-exit organ.',
     Visual: HealthVisual,
   },
   {
     world: 'Money',
     type: 'Deep Dive',
-    hook: 'Why your savings account is quietly making you poorer',
-    teaser: "Inflation math that most banks don't want you to think about.",
+    hook: "Delaying investment by 10 years doesn't halve your wealth. It destroys 70% of it.",
+    teaser: '₹5,000/month from age 25 grows to ₹3.2 crore. Starting at 35, same rate, yields ₹94 lakh. Compounding rewards the first decade the most.',
     Visual: MoneyVisual,
   },
   {
     world: 'World',
     type: 'Explainer',
-    hook: 'The country quietly buying up more land than anyone realises',
-    teaser: 'A map of global land acquisitions that rewrites the geopolitical story.',
+    hook: "90% of the world's most advanced chips are made in a country smaller than Jharkhand.",
+    teaser: "TSMC in Taiwan manufactures over 90% of the world's most advanced semiconductors. Every AI model, every modern weapon system depends on this single location.",
     Visual: WorldVisual,
   },
 ]
