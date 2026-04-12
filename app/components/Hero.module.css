@@ -56,109 +56,140 @@
   gap: 16px;
 }
 
-/* ── Card position dots ── */
-.dots {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(61, 61, 58, 0.2);
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.dotActive {
-  background: var(--tertiary);
-  transform: scale(1.3);
-}
-
-/* ── Phone shell ── */
-.phone {
-  width: 280px;
-  height: 606px;
-  background: #1C1C1A;
-  border-radius: 44px;
-  position: relative;
-  box-shadow:
-    0 0 0 1.5px rgba(255,255,255,0.08),
-    0 32px 80px rgba(0,0,0,0.35),
-    0 8px 20px rgba(0,0,0,0.2);
-  flex-shrink: 0;
-}
-
-/* Dynamic island */
-.island {
-  position: absolute;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90px;
-  height: 26px;
-  background: #000;
-  border-radius: 13px;
-  z-index: 2;
-}
-
-/* Screen */
-.screen {
-  position: absolute;
-  inset: 8px;
-  border-radius: 38px;
-  background: #F2F0EB;
-  overflow: hidden;
-}
-
-/* Card slot inside screen */
-.cardSlot {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-/* Individual card */
+/* ── Card layout ── */
 .card {
   position: absolute;
   inset: 0;
-  padding: 52px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  background: #FAF8F4;
 }
 
-.cardCategory {
+/* In-card nav bar */
+.cardNav {
+  flex-shrink: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.cardNavDots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.cardNavDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(45, 90, 42, 0.2);
+}
+
+.cardNavDotActive {
+  background: #2D5A2A;
+}
+
+/* Visual zone */
+.cardVisual {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* LEARN MORE vertical label */
+.learnMoreWrap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.learnMore {
+  transform: rotate(90deg);
+  white-space: nowrap;
   font-family: var(--font-jakarta);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 6px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: #2D5A2A;
+  font-weight: 700;
+}
+
+/* Bottom content card */
+.cardContent {
+  flex-shrink: 0;
+  height: 46%;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 14px 14px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(45, 90, 42, 0.08);
+  font-family: var(--font-jakarta);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2D5A2A;
+  align-self: flex-start;
 }
 
 .cardHook {
   font-family: var(--font-jakarta);
-  font-size: 17px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
-  color: #3D3D3A;
+  color: #1C1C1A;
+  margin-top: 8px;
 }
 
 .cardTeaser {
   font-family: var(--font-jakarta);
-  font-size: 11px;
-  line-height: 1.65;
-  color: rgba(61, 61, 58, 0.5);
-  margin-top: 4px;
+  font-size: 10px;
+  line-height: 1.6;
+  color: rgba(28, 28, 26, 0.5);
+  margin-top: 6px;
 }
 
-.cardAccent {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
+.cardActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.cardActionBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-jakarta);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2D5A2A;
 }
 
 /* ── Slide animations ── */
@@ -216,7 +247,6 @@
   .right {
     order: 2;
     justify-content: flex-start;
-    gap: 10px;
   }
 
   .phone {
@@ -241,17 +271,36 @@
     border-radius: 24px;
   }
 
-  .card {
-    padding: 32px 14px 14px;
-    gap: 8px;
+  .cardNav {
+    height: 26px;
+    padding: 0 10px;
+  }
+
+  .cardContent {
+    border-radius: 14px 14px 0 0;
+    padding: 10px 10px 8px;
   }
 
   .cardHook {
-    font-size: 13px;
+    font-size: 10px;
     line-height: 1.4;
   }
 
   .cardTeaser {
-    font-size: 10px;
+    font-size: 8px;
+  }
+
+  .cardPill {
+    font-size: 6px;
+    padding: 2px 6px;
+  }
+
+  .cardActionBtn {
+    font-size: 6px;
+    gap: 3px;
+  }
+
+  .learnMore {
+    font-size: 5px;
   }
 }
