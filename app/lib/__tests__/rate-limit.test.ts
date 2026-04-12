@@ -1,9 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { checkRateLimit } from '../rate-limit'
+import { checkRateLimit, _resetStore } from '../rate-limit'
 
 describe('checkRateLimit', () => {
   beforeEach(() => {
     vi.useFakeTimers()
+    _resetStore()
   })
 
   afterEach(() => {

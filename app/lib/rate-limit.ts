@@ -21,3 +21,8 @@ export function checkRateLimit(ip: string): boolean {
   entry.count++
   return true
 }
+
+/** For testing only — resets the in-memory store. */
+export function _resetStore(): void {
+  store.clear()
+}
