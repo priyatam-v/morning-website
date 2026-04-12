@@ -35,10 +35,12 @@
 /* ── Row ── */
 .row {
   display: flex;
+  justify-content: center;
   padding: 16px 0;
 }
 
 .text {
+  text-align: center;
   font-family: var(--font-jakarta);
   font-size: 18px;
   font-weight: 400;
