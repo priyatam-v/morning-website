@@ -2,6 +2,44 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import styles from './Hero.module.css'
 
+function HealthVisual() {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="hGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#F5C4A8" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#FAF8F4" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="95" r="80" fill="url(#hGlow)" />
+      <circle cx="95" cy="85" r="55" fill="#F5C4A8" opacity="0.55" />
+      <circle cx="125" cy="115" r="32" fill="#F0A888" opacity="0.4" />
+    </svg>
+  )
+}
+
+function MoneyVisual() {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+      <rect x="46" y="112" width="28" height="48" rx="4" fill="#D4A843" opacity="0.5" />
+      <rect x="84" y="80" width="28" height="80" rx="4" fill="#C49030" opacity="0.65" />
+      <rect x="122" y="48" width="28" height="112" rx="4" fill="#B07820" opacity="0.8" />
+    </svg>
+  )
+}
+
+function WorldVisual() {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="90" r="60" fill="rgba(24,95,165,0.07)" />
+      <ellipse cx="100" cy="90" rx="60" ry="60" fill="none" stroke="rgba(24,95,165,0.3)" strokeWidth="1.5" />
+      <ellipse cx="100" cy="90" rx="32" ry="60" fill="none" stroke="rgba(24,95,165,0.3)" strokeWidth="1.5" />
+      <ellipse cx="100" cy="90" rx="60" ry="22" fill="none" stroke="rgba(24,95,165,0.3)" strokeWidth="1.5" />
+      <line x1="40" y1="90" x2="160" y2="90" stroke="rgba(24,95,165,0.15)" strokeWidth="1" />
+    </svg>
+  )
+}
+
 const CARDS = [
   {
     world: 'Health',
