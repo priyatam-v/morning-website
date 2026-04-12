@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import styles from './Waitlist.module.css'
+import posthog from 'posthog-js'
 
 export default function Waitlist() {
   const ref = useRef<HTMLDivElement>(null)
@@ -11,7 +12,13 @@ export default function Waitlist() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) ref.current?.classList.add(styles.visible) },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          ref.current?.classList.add(styles.visible)
+          posthog.capture('section_viewed', { section: 'waitlist' })
+          observer.disconnect()
+        }
+      },
       { threshold: 0.3 }
     )
     if (ref.current) observer.observe(ref.current)
