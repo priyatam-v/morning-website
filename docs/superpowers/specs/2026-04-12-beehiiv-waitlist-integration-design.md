@@ -55,17 +55,19 @@ These must be set in `.env.local` locally and in the deployment environment (Ver
 ```
 
 **Behaviour:**
-1. Parse and validate `email` from JSON body — return `400` if missing or malformed
-2. Call Beehiiv Subscribe API:
+1. Check rate limit for the requesting IP — return `429` if exceeded
+2. Parse and validate `email` from JSON body — return `400` if missing or malformed
+3. Call Beehiiv Subscribe API:
    - `reactivate_existing: true` — prevents duplicate confirmation emails for re-subscribers
    - `double_opt_in: true` — Beehiiv sends a confirmation email; subscriber is only added after they confirm
    - `utm_source: "waitlist"` — tracks the sign-up source in Beehiiv dashboard
-3. On Beehiiv `2xx` → return `200 { ok: true }`
-4. On Beehiiv `4xx/5xx` or network failure → return `502 { error: "Could not subscribe. Please try again." }`
+4. On Beehiiv `2xx` → return `200 { ok: true }`
+5. On Beehiiv `4xx/5xx` or network failure → return `502 { error: "Could not subscribe. Please try again." }`
 
 **Error responses:**
 | Scenario | Status | Body |
 |----------|--------|------|
+| Rate limit exceeded | 429 | `{ error: "Too many requests. Please try again later." }` |
 | Missing / invalid email | 400 | `{ error: "Invalid email" }` |
 | Beehiiv API failure | 502 | `{ error: "Could not subscribe. Please try again." }` |
 
@@ -91,6 +93,21 @@ The form's visual structure and CSS are untouched. Only `handleSubmit` and state
 
 ---
 
+## Rate Limiting
+
+**Strategy:** In-memory per-IP rate limiting — no additional services or dependencies required.
+
+**Limit:** 5 requests per IP per 60 seconds.
+
+**Implementation:** A module-level `Map<string, { count: number; resetAt: number }>` tracks request counts per IP. On each request, the IP is extracted from the `x-forwarded-for` header (Vercel sets this) with a fallback to `"unknown"`. If the window has expired, the counter resets; if `count >= 5`, return `429`.
+
+**Trade-offs:**
+- Resets on serverless cold starts — acceptable for a newsletter waitlist
+- Does not protect against distributed abuse across many IPs — CAPTCHA can be added later if needed
+- Zero cost, zero dependencies — right level of protection for this use case
+
+---
+
 ## Opt-in Strategy
 
 **Double opt-in** is used. After form submission, Beehiiv sends a confirmation email to the address. The subscriber only appears on the Morning publication list after they click the confirmation link. This protects sender reputation and ensures only valid, interested emails are collected.
@@ -99,6 +116,5 @@ The form's visual structure and CSS are untouched. Only `handleSubmit` and state
 
 ## Out of Scope
 
-- Rate limiting on the API route (can be added later via middleware or Vercel Edge Config)
 - CAPTCHA / bot protection
 - Analytics events (e.g. tracking conversions beyond Beehiiv's `utm_source`)
