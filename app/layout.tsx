@@ -81,6 +81,11 @@ const jsonLd = {
       description:
         'Morning delivers twenty knowledge cards every morning — the antidote to doomscrolling.',
       foundingDate: '2026',
+      founder: {
+        '@type': 'Person',
+        name: 'Priyatam',
+        sameAs: ['https://www.linkedin.com/in/priyatam-vinnakota/'],
+      },
       contactPoint: { '@type': 'ContactPoint', email: 'hello@getmorning.co' },
       sameAs: ['https://www.instagram.com/getmorning.co'],
     },

@@ -9,8 +9,42 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'What is a Knowledge Card?',
     description: "One idea, distilled to its essence. The format behind Morning's daily brief.",
+    type: 'article',
+    publishedTime: '2026-04-13T00:00:00Z',
   },
   robots: { index: true, follow: true },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'What is a Knowledge Card?',
+  description:
+    "A knowledge card is a single idea, distilled to its essence: hook, explanation, source. The format Morning uses to deliver twenty things worth knowing every morning.",
+  url: 'https://www.getmorning.co/blog/what-is-a-knowledge-card',
+  datePublished: '2026-04-13',
+  dateModified: '2026-04-13',
+  author: {
+    '@type': 'Organization',
+    '@id': 'https://www.getmorning.co/#organization',
+    name: 'Morning',
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': 'https://www.getmorning.co/#organization',
+    name: 'Morning',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://www.getmorning.co/icon.png',
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://www.getmorning.co/blog/what-is-a-knowledge-card',
+  },
+  keywords: ['knowledge card', 'daily brief', 'learning', 'morning newsletter', 'curated content'],
+  articleSection: 'About Morning',
+  inLanguage: 'en-US',
 }
 
 const EXAMPLE = {
@@ -25,12 +59,17 @@ const EXAMPLE = {
 
 export default function KnowledgeCardPost() {
   return (
+    <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <div style={{ background: '#FAF8F4', minHeight: '100vh', fontFamily: 'var(--font-jakarta, system-ui, sans-serif)' }}>
 
       <header style={{ borderBottom: '1px solid #E8E3DB', padding: '20px 24px' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <img src="/Morning_Logo.svg" alt="Morning" style={{ height: 24, display: 'block', filter: 'brightness(0) saturate(100%) invert(18%) sepia(5%) saturate(500%) hue-rotate(10deg)' }} />
+            <img src="/Morning_Logo.svg" alt="Morning" width={99} height={24} style={{ height: 24, width: 'auto', display: 'block', filter: 'brightness(0) saturate(100%) invert(18%) sepia(5%) saturate(500%) hue-rotate(10deg)' }} />
           </Link>
           <Link href="/#waitlist" style={{ fontSize: 13, fontWeight: 600, color: '#FAF8F4', background: '#2D5A2A', padding: '8px 18px', borderRadius: 6, textDecoration: 'none' }}>
             Subscribe free
@@ -217,6 +256,7 @@ export default function KnowledgeCardPost() {
         </div>
       </main>
     </div>
+    </>
   )
 }
 
