@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import styles from './Waitlist.module.css'
-import posthog from 'posthog-js'
+import { capture } from '../lib/capture'
 
 export default function Waitlist() {
   const ref = useRef<HTMLDivElement>(null)
@@ -15,7 +15,7 @@ export default function Waitlist() {
       ([entry]) => {
         if (entry.isIntersecting) {
           ref.current?.classList.add(styles.visible)
-          posthog.capture('section_viewed', { section: 'waitlist' })
+          capture('section_viewed', { section: 'waitlist' })
           observer.disconnect()
         }
       },
@@ -30,7 +30,7 @@ export default function Waitlist() {
     if (!email) return
     setLoading(true)
     setError(null)
-    posthog.capture('waitlist_submitted')
+    capture('waitlist_submitted')
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
@@ -38,7 +38,7 @@ export default function Waitlist() {
         body: JSON.stringify({ email }),
       })
       if (res.ok) {
-        posthog.capture('waitlist_success')
+        capture('waitlist_success')
         setSubmitted(true)
       } else {
         let message = 'Something went wrong. Please try again.'
@@ -46,11 +46,11 @@ export default function Waitlist() {
           const data = await res.json()
           if (typeof data?.error === 'string') message = data.error
         } catch { /* ignore non-JSON error bodies */ }
-        posthog.capture('waitlist_error', { reason: message })
+        capture('waitlist_error', { reason: message })
         setError(message)
       }
     } catch {
-      posthog.capture('waitlist_error', { reason: 'network_error' })
+      capture('waitlist_error', { reason: 'network_error' })
       setError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)

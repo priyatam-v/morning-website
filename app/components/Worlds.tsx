@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import posthog from 'posthog-js'
 import styles from './Worlds.module.css'
+import { capture } from '../lib/capture'
 
 const WORLDS = [
   {
@@ -115,7 +115,7 @@ export default function Worlds() {
       ([entry]) => {
         if (entry.isIntersecting) {
           ref.current?.classList.add(styles.visible)
-          posthog.capture('section_viewed', { section: 'worlds' })
+          capture('section_viewed', { section: 'worlds' })
           observer.disconnect()
         }
       },
@@ -139,7 +139,7 @@ export default function Worlds() {
   return (
     <section className={styles.section}>
       <div className={styles.header} ref={ref}>
-        <p className={styles.eyebrow}>The things that quietly shape everything.</p>
+        <h2 className={styles.eyebrow}>Five topics. Twenty cards. One app.</h2>
       </div>
 
       <div className={styles.grid}>
@@ -154,9 +154,9 @@ export default function Worlds() {
               {world.illustration(world.color)}
             </div>
             <div className={styles.worldContent}>
-              <p className={styles.worldCategory} style={{ color: world.color }}>
+              <h3 className={styles.worldCategory} style={{ color: world.color }}>
                 {world.category}
-              </p>
+              </h3>
               <p className={styles.worldDesc}>{world.lines.join(' ')}</p>
             </div>
           </div>

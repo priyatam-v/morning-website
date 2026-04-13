@@ -138,7 +138,7 @@ export default function Hero() {
   const cooldownRef = useRef(false)
   const deltaAccRef = useRef(0)
   const touchStartYRef = useRef(0)
-  const headlineRef = useRef<HTMLDivElement>(null)
+  const headlineRef = useRef<HTMLHeadingElement>(null)
 
   // Headline intro fade-in
   useEffect(() => {
@@ -272,11 +272,11 @@ export default function Hero() {
   return (
     <section className={styles.hero}>
       <div className={styles.left}>
-        <div ref={headlineRef} className={styles.headline}>
+        <h1 ref={headlineRef} className={styles.headline}>
           Your mind deserves<br />a better morning.
-        </div>
+        </h1>
         <p className={styles.subline}>
-          Morning is a daily brief for people who want to understand the world — not just scroll through it.
+          Morning is a mobile app that gives you twenty curated knowledge cards every morning — across Health, Money, World, Technology, and Psychology. No algorithm. No streaks. Just knowledge.
         </p>
       </div>
 

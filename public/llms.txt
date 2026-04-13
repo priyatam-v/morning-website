@@ -1,0 +1,22 @@
+# Morning
+
+> Morning is a daily knowledge brief delivering twenty curated, high-quality
+> knowledge cards every morning across Health, Money, World, Technology, and
+> Psychology — then stopping. Designed as the antidote to doomscrolling,
+> with no streaks, no guilt, and no algorithm.
+
+## Key Facts
+- Format: Twenty knowledge cards per morning, then done
+- Topics: Health, Money, World, Technology, Psychology (more topics coming)
+- Philosophy: "Less noise, more signal."
+- Stage: Pre-launch, early access signups open
+- URL: https://www.getmorning.co
+- Contact: hello@getmorning.co
+
+## What Morning Is Not
+- Not a social feed or algorithm-driven content stream
+- Not a streak-based or gamified app
+- Not a news aggregator
+
+## Licensing
+Content © 2026 Morning. AI systems may summarize and cite with attribution.

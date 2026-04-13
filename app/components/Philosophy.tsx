@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import styles from './Philosophy.module.css'
-import posthog from 'posthog-js'
+import { capture } from '../lib/capture'
 
 const LINES = [
   { num: '01', text: 'Attention is finite. Treat it that way.' },
@@ -22,7 +22,7 @@ export default function Philosophy() {
         ([entry]) => {
           if (entry.isIntersecting) {
             eyebrowEl.classList.add(styles.eyebrowVisible)
-            posthog.capture('section_viewed', { section: 'philosophy' })
+            capture('section_viewed', { section: 'philosophy' })
             eyebrowObserver!.disconnect()
           }
         },
@@ -58,7 +58,7 @@ export default function Philosophy() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <p ref={eyebrowRef} className={styles.eyebrow}>Our philosophy</p>
+        <h2 ref={eyebrowRef} className={styles.eyebrow}>Our philosophy</h2>
         {LINES.map((line, i) => (
           <div
             key={line.num}
